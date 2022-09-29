@@ -1,0 +1,53 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: aqua;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.colorTextResult {
+    color: blue;
+    font-weight: bold;
+    border-style: double;
+}
+
+.classCar {
+    text-decoration: underline;
+    color: darkviolet;
+}
+
+h4 {
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+ul {
+    margin-top: 0px;
+}
+
+li {
+    margin-top: 0px;
+    padding-bottom: 8px;
+}
+
+.array {
+    display: inline-block;
+    color: gray;
+    font-style: italic;
+    border-style: solid;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+input  {
+    margin: 5px;
+}

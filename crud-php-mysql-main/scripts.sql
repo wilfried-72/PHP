@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS `crud_tutorial` CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+USE crud_tutorial;
+
+CREATE TABLE  `customers` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`name` VARCHAR( 100 ) NOT NULL ,
+`email` VARCHAR( 100 ) NOT NULL ,
+`mobile` VARCHAR( 100 ) NOT NULL
+) ENGINE = INNODB;
