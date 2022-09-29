@@ -27,7 +27,7 @@
         echo "<div class='box'>";
 
         echo "<div>";
-        echo "<p>Opérations arithmétiques PHP</p>";
+        echo "<h5>Opérations arithmétiques PHP</h5>";
         $y = $a + $b;
         echo "<li>" . "le resultat de l'opération ' $a+$b ' est: <span class='colorTextResult'>" . $y . "</span></li>";
         $y = $a - $b;
@@ -47,7 +47,7 @@
 
         echo "</div>";
         echo "<div>";
-        echo "<p>Opérations d'affectation PHP</p>";
+        echo "<h5>Opérations d'affectation PHP</h5>";
         $a1 += $b1;
         echo "<li>" . "le resultat de l'opération ' a+=b ' est: <span class='colorTextResult'>" . $a1 . "</span></li>";
         $a1 -= $b1;
@@ -74,7 +74,7 @@
         echo "<div class='box'>";
 
         echo "<div>";
-        echo "<p>Opérateurs de comparaison PHP</p>";
+        echo "<h5>Opérateurs de comparaison PHP</h5>";
 
         echo "<li>" . "Est ce que ' a==b ': ";
         echo "<span class='colorTextResult'>";
@@ -153,7 +153,7 @@
         echo "</div>";
 
         echo "<div>";
-        echo "<p>Opérateurs d'incrémentation/décrémentation PHP</p>";
+        echo "<h5>Opérateurs d'incrémentation/décrémentation PHP</h5>";
         echo "<li>" . "Pre-incrementation de a +1 est: <span class='colorTextResult'>" . ++$a . "</span></li>";
         echo "<li>" . "Post-incrementation de b +1 est: <span class='colorTextResult'>" . $b++ . "</span></li>";
         echo "<li>" . "Post-incrementation de b +1 est: <span class='colorTextResult'>" . $b++ . "</span></li>";
@@ -189,7 +189,7 @@
 
         echo "<div class='box'>";
         echo "<div>";
-        echo "<p>Opérateurs logiques PHP</p>";
+        echo "<h5>Opérateurs logiques PHP</h5>";
 
         echo "<li>" . "Table de vérité sur ($x and $y): ";
         echo "<span class='colorTextResult'>";
@@ -229,7 +229,7 @@
         echo "</div>";
 
         echo "<div>";
-        echo "<p>Opérateurs de chaîne PHP</p>";
+        echo "<h5>Opérateurs de chaîne PHP</h5>";
 
         echo "<li>" . "Concatenation du texte de la checkbox1 et 2: ";
         echo "<span class='colorTextResult'>";
@@ -241,45 +241,83 @@
         echo $checkbox1Text .= $checkbox2Text;
         echo "</span></li>";
 
-        echo "<p> Opérateurs de tableau PHP</p>";
+        echo "<h5> Opérateurs de tableau PHP</h5>";
         echo "<p> Tableau pour comparaison</p>";
         print_r($checkboxes2);
-        echo "<p></p>";
+        echo "<h5></h5>";
 
         echo "<li>" . "Union of  array: ";
         echo "<span class='colorTextResult'>";
         print_r($checkboxes1 + $checkboxes2);
         echo "</span></li>";
 
-        echo "<li>" . " ";
+        echo "<li>" . "Test de comparaison (x == y) avec le même tableau 'qui a été généré': ";
         echo "<span class='colorTextResult'>";
         echo var_dump($checkboxes1 == $checkboxes1);
         echo "</span></li>";
 
-        echo "<li>" . " ";
+        echo "<li>" . "Test de comparaison (x == y) avec le tableau 'qui a été généré' et celui en comparaison: ";
         echo "<span class='colorTextResult'>";
         echo var_dump($checkboxes1 == $checkboxes2);
         echo "</span></li>";
 
-        echo "<li>" . "";
+        echo "<li>" . "Test de comparaison (x === y) avec le même tableau 'qui a été généré': ";
         echo "<span class='colorTextResult'>";
-        echo var_dump($x xor $y);
+        echo var_dump($checkboxes1 === $checkboxes1);
         echo "</span></li>";
 
-        echo "<li>" . " ";
+        echo "<li>" . "Test de comparaison (x === y) avec le tableau 'qui a été généré' et celui en comparaison: ";
         echo "<span class='colorTextResult'>";
-        echo var_dump(!$x);
+        echo var_dump($checkboxes1 === $checkboxes2);
         echo "</span></li>";
 
-        echo "<li>" . " ";
+        echo "<li>" . "Test de comparaison (x != y) avec le même tableau 'qui a été généré': ";
         echo "<span class='colorTextResult'>";
-        echo var_dump(!$y);
+        echo var_dump($checkboxes1 != $checkboxes1);
         echo "</span></li>";
+
+        echo "<li>" . "Test de comparaison (x <> y) avec le tableau 'qui a été généré' et celui en comparaison: ";
+        echo "<span class='colorTextResult'>";
+        echo var_dump($checkboxes1 <> $checkboxes2);
+        echo "</span></li>";
+
+        echo "<li>" . "Test de comparaison (x !==y) avec le même tableau 'qui a été généré': ";
+        echo "<span class='colorTextResult'>";
+        echo var_dump($checkboxes1 !== $checkboxes1);
+        echo "</span></li>";
+
+        echo "<li>" . "Test de comparaison (x !== y) avec le tableau 'qui a été généré' et celui en comparaison: ";
+        echo "<span class='colorTextResult'>";
+        echo var_dump($checkboxes1 !== $checkboxes2);
+        echo "</span></li>";
+
+        echo "<h5> Opérateurs d'affectation conditionnelle PHP</h5>";
+        echo "<li>" . " Condition ternaire entre le même tableau 'qui a été généré': ";
+        $checkboxes1 === $checkboxes1 ? $result = "les deux tableaux sont identique" : $result = "les deux tableaux ne sont identiques";
+        echo "<span class='colorTextResult'>";
+        echo $result;
+        echo "</span></li>";
+        echo "<li>" . " Condition ternaire entre le tableau 'qui a été généré' et celui en comparaison: ";
+        $checkboxes1 === $checkboxes2 ? $result = "les deux tableaux sont identique" : $result = "les deux tableaux ne sont identiques";
+        echo "<span class='colorTextResult'>";
+        echo $result;
+        echo "</span></li>";
+
+        echo "<li>" . "Test si tableau généré exite et non null et si oui affiche ce tableau: ";
+        $resultTest = $checkboxes1 ?? $checkboxes2;
+        echo "<span class='colorTextResult'>";
+        print_r($resultTest);
+        echo "</span></li>";
+
+        echo "<li>" . "Même test avec une variable null et si null, on affiche le tableau de comparaison: ";
+        $resultTest = $checkboxes3 ?? $checkboxes2;
+        echo "<span class='colorTextResult'>";
+        print_r($resultTest);
+        echo "</span></li>";
+
 
         echo "</div>";
-
-
-        echo "<div>";
+        echo "</div>";
     }
 
 

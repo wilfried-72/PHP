@@ -43,7 +43,7 @@ $checkboxes = $_POST["checkboxes"];
         Le texte de la checkbox2 est : <?php echo $_POST["checkbox2Text"]; ?><br>
     </div>
     <div style="margin-top:10px">
-        Le tableau est: <?php print_r($checkboxes); ?><br>
+        Le tableau genéré est: <?php print_r($checkboxes); ?><br>
     </div>
 </div>
 
