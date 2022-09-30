@@ -318,6 +318,34 @@
         return $z;
     }
 
+    function sorttable($value)
+    {
+
+        echo "voici le tableau de personne avec leurs ages: <br>";
+        echo "Peter =>35<br>", "Ben=>37<br>", "Joe=>43<br><br>";
+
+        foreach ($value as $x => $x_value) {
+            echo "Key=" . $x . ", Value=" . $x_value;
+            echo "<br>";
+        }
+    };
+
+    function sorttableSimple($value)
+    {
+        echo "voici le tableau de marque de voiture: <br>";
+        echo "Volvo, BMW ,Toyota <br><br>";
+
+        $clength = count($value);
+        for ($x = 0; $x < $clength; $x++) {
+            echo $value[$x];
+            echo "<br>";
+        }
+    };
+
+    function addition()
+    {
+        $GLOBALS['z'] = $GLOBALS['x'] + $GLOBALS['y'];
+    };
 
     ?>
 

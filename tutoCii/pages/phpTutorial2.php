@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <!-- import css bootstrap  -->
     <link href="../assets/css/index.css" rel="stylesheet">
-</head>
-
-<body>
 
     <!-- -------------------------------------------------------------------- -->
     <?php
@@ -88,7 +79,7 @@
                         echo "<div style='background-color:$color;margin:5px';>Vous avez choisis la couleur green</div>";
                         break;
                     default:
-                        echo "<div>Aucune couleur a été choisie</div>";
+                        echo "<div style='padding:5px;text-align:center'>Aucune couleur a été choisie</div>";
                 }
                 ?>
 
@@ -262,16 +253,16 @@
 
             if (!empty($_POST['envoyer2'])) {
 
-                echo "<div style='display:flex;justify-content:space-between;'>";
+                // echo "<div style='display:flex;justify-content:space-between;'>";
                 for ($row = 0; $row < 4; $row++) {
-                    echo "<p><b>Row number $row</b></p>";
-                    echo "<ul>";
+                    echo "<p style='margin:0;padding:0'><b>Row number $row</b></p>";
+                    echo "<ul style='margin:0;padding:0'>";
                     for ($col = 0; $col < 3; $col++) {
-                        echo "<li>" . $cars[$row][$col] . "</li>";
+                        echo "<li style='margin:0;padding:0'>" . $cars[$row][$col] . "</li>";
                     }
                     echo "</ul>";
                 }
-                echo "<div>";
+                // echo "<div style='padding:5px;text-align:center'>";
             }
             ?>
 
@@ -310,52 +301,36 @@
                 $sort = $_GET["sort"];
                 $age = array("Peter" => "35", "Ben" => "37", "Joe" => "43");
                 $cars = array("Volvo", "BMW", "Toyota");
-
-                echo "voici le tableau de personne avec leurs ages: <br>";
-                echo "Peter =>35<br>", "Ben=>37<br>", "Joe=>43<br><br>";
-                echo "voici le tableau de personne avec leurs ages: <br>";
-                echo "Volvo, BMW ,Toyota <br><br>";
                 $cars = array("Volvo", "BMW", "Toyota");
-
-                function sorttable($value)
-                {
-                    foreach ($value as $x => $x_value) {
-                        echo "Key=" . $x . ", Value=" . $x_value;
-                        echo "<br>";
-                    }
-                };
-
-                function sorttableSimple($value)
-                {
-                    $clength = count($value);
-                    for ($x = 0; $x < $clength; $x++) {
-                        echo $value[$x];
-                        echo "<br>";
-                    }
-                };
 
                 switch ($sort) {
                     case "1":
+                        echo "sort()- trier les tableaux par ordre croissant<br><br>";
                         sort($cars);
                         sorttableSimple($cars);
                         break;
                     case "2":
+                        echo "rsort()- trier les tableaux par ordre décroissant<br><br>";
                         rsort($cars);
                         sorttableSimple($cars);
                         break;
                     case "3":
+                        echo "asort()- trier les tableaux associatifs par ordre croissant, selon la valeur<br><br>";
                         asort($age);
                         sorttable($age);
                         break;
                     case "4":
+                        echo "ksort()- trier les tableaux associatifs par ordre croissant, selon la clé<br><br>";
                         ksort($age);
                         sorttable($age);
                         break;
                     case "5":
+                        echo "arsort()- trier les tableaux associatifs par ordre décroissant, selon la valeur<br><br>";
                         arsort($age);
                         sorttable($age);
                         break;
                     case "6":
+                        echo "krsort()- trier les tableaux associatifs par ordre décroissant, selon la clé<br><br>";
                         krsort($age);
                         sorttable($age);
                         break;
@@ -370,21 +345,17 @@
         <a href="phpTutorial2.php">Relancer le formulaire et affacer les données </a>
     </div>
 
-</body>
+    <script>
+        const message = document.getElementById("time")
+        inputFormTime = document.getElementById("inputFormTime");
 
-</html>
+        // inputTime.addEventListener('change', (event) => {
+        //     message.innerText = "";
 
-<script>
-    const message = document.getElementById("time")
-    inputFormTime = document.getElementById("inputFormTime");
+        // });
 
-    // inputTime.addEventListener('change', (event) => {
-    //     message.innerText = "";
+        inputFormTime.addEventListener('focusin', (event) => {
+            message.innerText = ""
 
-    // });
-
-    inputFormTime.addEventListener('focusin', (event) => {
-        message.innerText = ""
-
-    });
-</script>
+        });
+    </script>
