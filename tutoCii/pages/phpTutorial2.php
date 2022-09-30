@@ -312,8 +312,9 @@
                 $cars = array("Volvo", "BMW", "Toyota");
 
                 echo "voici le tableau de personne avec leurs ages: <br>";
-                echo "Peter =>35<br>", "Ben=>37<br>", "Joe=>43<br>";
+                echo "Peter =>35<br>", "Ben=>37<br>", "Joe=>43<br><br>";
                 echo "voici le tableau de personne avec leurs ages: <br>";
+                echo "Volvo, BMW ,Toyota <br><br>";
                 $cars = array("Volvo", "BMW", "Toyota");
 
                 function sorttable($value)
