@@ -190,24 +190,183 @@
     </form>
 
 
+    <div class="box">
+        <div>
+            <!-- -------------------------------------------------------------------- -->
+            <h4>Fonction avec retour de valeur et variable typée PHP</h4>
+            <form action="" method="get">
+                Nombre 1: <input type="number" required name="num1" size="2"><br>
+                Nombre 2: <input type="number" required name="num2" size="2"><br>
+                <input type="submit" value="Calculer">
+            </form>
+
+            <?php
+            $num1 =  (int) $_GET["num1"];
+            $num2 =  (int) $_GET["num2"];
+            echo "$num1 + $num2 = " . sum($num1, $num2) . "<br>";
+            ?>
+
+        </div>
 
 
 
-    <?php
-    function sum(int $x, int $y)
-    {
-        $z = $x + $y;
-        return $z;
-    }
+        <div>
+            <h4>Fonction avec retour de valeur (Type Declaration) et gab de 5 de la valeur</h4>
+            <form action="" method="get">
+                text1: <input type="text" required name="text1" size="2"><br>
+                Gab: <input type="number" required name="gab1" size="1"><br>
+                <input type="submit" value="Calculer">
+            </form>
 
-    echo "5 + 10 = " . sum(5, 10) . "<br>";
-    echo "7 + 13 = " . sum(7, 13) . "<br>";
-    echo "2 + 4 = " . sum(2, 4);
-    ?>
+            <?php
+            $text1 =  (float) $_GET["text1"];
+            $gab1 =  (int) $_GET["gab1"];
 
+            function addNumbersFloat(float $a, int $b): float
+            {
+                return (float)($a += $b);
+            }
+
+            function addNumbers(float $a, int $b): int
+            {
+
+                return (int) ($a += $b);
+            }
+
+            echo "Le resultat de l'opération est :" . addNumbersFloat($text1, $gab1) . "<br>";
+            echo "Le resultat de l'opération sans la virgule est :" . addNumbers($text1, $gab1) . "<br>";
+            ?>
+
+        </div>
+    </div>
+
+
+    <div class="box">
+        <div>
+            <!-- -------------------------------------------------------------------- -->
+            <h4>Multidimension dans un tableau </h4>
+            <?php
+
+            echo "voici le tableau voiture:";
+            echo "array('Volvo', 22, 18),<br>
+                array('BMW', 15, 13),<br>
+                array('Saab', 5, 2),<br>
+                array('Land Rover', 17, 15)<br>";
+
+            $cars = array(
+                array("Volvo", 22, 18),
+                array("BMW", 15, 13),
+                array("Saab", 5, 2),
+                array("Land Rover", 17, 15)
+            );
+
+            if (!empty($_POST['envoyer2'])) {
+
+                echo "<div style='display:flex;justify-content:space-between;'>";
+                for ($row = 0; $row < 4; $row++) {
+                    echo "<p><b>Row number $row</b></p>";
+                    echo "<ul>";
+                    for ($col = 0; $col < 3; $col++) {
+                        echo "<li>" . $cars[$row][$col] . "</li>";
+                    }
+                    echo "</ul>";
+                }
+                echo "<div>";
+            }
+            ?>
+
+            <div>
+                <form style="display:flex;justify-content:center;margin-top:20px" action="" method="post">
+                    <input type="submit" id="envoyer" name="envoyer2" value="envoyer">
+                </form>
+            </div>
+        </div>
+
+
+        <div style="text-align:center ;">
+            <h4>Fonction tri array:</h4>
+            <div>
+                <form action="" method="get">
+                    <div>
+                        <label for="sort">Background Color:</label>
+                        <select name="sort" id="sort">
+                            <option value="" selected>--- Choisir le tri---</option>
+                            <option value="1">sort()- trier les tableaux par ordre croissant</option>
+                            <option value="2">rsort()- trier les tableaux par ordre décroissant</option>
+                            <option value="3">asort()- trier les tableaux associatifs par ordre croissant, selon la valeur</option>
+                            <option value="4">ksort()- trier les tableaux associatifs par ordre croissant, selon la clé</option>
+                            <option value="5">arsort()- trier les tableaux associatifs par ordre décroissant, selon la valeur</option>
+                            <option value="6">krsort()- trier les tableaux associatifs par ordre décroissant, selon la clé </option>
+
+                        </select>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="submit">Select</button>
+                    </div>
+                </form>
+
+                <?php
+                $sort = $_GET["sort"];
+                $age = array("Peter" => "35", "Ben" => "37", "Joe" => "43");
+                $cars = array("Volvo", "BMW", "Toyota");
+
+                echo "voici le tableau de personne avec leurs ages: <br>";
+                echo "Peter =>35<br>", "Ben=>37<br>", "Joe=>43<br>";
+                echo "voici le tableau de personne avec leurs ages: <br>";
+                $cars = array("Volvo", "BMW", "Toyota");
+
+                function sorttable($value)
+                {
+                    foreach ($value as $x => $x_value) {
+                        echo "Key=" . $x . ", Value=" . $x_value;
+                        echo "<br>";
+                    }
+                };
+
+                function sorttableSimple($value)
+                {
+                    $clength = count($value);
+                    for ($x = 0; $x < $clength; $x++) {
+                        echo $value[$x];
+                        echo "<br>";
+                    }
+                };
+
+                switch ($sort) {
+                    case "1":
+                        sort($cars);
+                        sorttableSimple($cars);
+                        break;
+                    case "2":
+                        rsort($cars);
+                        sorttableSimple($cars);
+                        break;
+                    case "3":
+                        asort($age);
+                        sorttable($age);
+                        break;
+                    case "4":
+                        ksort($age);
+                        sorttable($age);
+                        break;
+                    case "5":
+                        arsort($age);
+                        sorttable($age);
+                        break;
+                    case "6":
+                        krsort($age);
+                        sorttable($age);
+                        break;
+                }
+                ?>
+            </div>
+        </div>
+
+    </div>
 
     <div style="text-align:center;margin-top:30px">
-        <a href="phpTutorial2.php">Relancer le formulaire </a>
+        <a href="phpTutorial2.php">Relancer le formulaire et affacer les données </a>
     </div>
 
 </body>

@@ -308,14 +308,14 @@
         echo "<span class='colorTextResult'>";
         echo $toto;
         echo "</span></li>";
-
-
-
-
-
-
         echo "</div>";
         echo "</div>";
+    }
+
+    function sum(int $x, int $y)
+    {
+        $z = $x + $y;
+        return $z;
     }
 
 
