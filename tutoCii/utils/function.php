@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/index.css" rel="stylesheet">
+    <link href="../assets/css/index.css" rel="stylesheet">
     <title>Feuille de calcul</title>
 </head>
 
@@ -19,7 +19,7 @@
         echo "<li>" . "Voici la valeur aléàtoire choisie dans ce tableau est: <span class='colorTextResult'>" . cars[rand(0, sizeof(cars) - 1)] . "</span></li>";
     }
 
-    function myOperation($a, $b)
+    function myOperation(int $a = 1, int $b = 1)
     {
         $a1 = $a;
         $a2 = $a;
@@ -36,7 +36,6 @@
         echo "<li>" . "le resultat de l'opération ' $a*$b ' est: <span class='colorTextResult'>" . $y . "</span></li>";
 
         if (trim($b) <> 0) {
-            echo "test fonction if";
             $y = $a / $b;
             echo "<li>" . "le resultat de l'opération ' $a/$b ' est: <span class='colorTextResult'>" . $y . "</span></li>";
             $y = $a % $b;
@@ -271,22 +270,22 @@
         echo var_dump($checkboxes1 === $checkboxes2);
         echo "</span></li>";
 
-        echo "<li>" . "Test de comparaison (x != y) avec le même tableau 'qui a été généré': ";
+        echo "<li>" . "est de comparaison (x != y) avec le même tableau 'qui a été généré': ";
         echo "<span class='colorTextResult'>";
         echo var_dump($checkboxes1 != $checkboxes1);
         echo "</span></li>";
 
-        echo "<li>" . "Test de comparaison (x <> y) avec le tableau 'qui a été généré' et celui en comparaison: ";
+        echo "<li>" . "est de comparaison (x <> y) avec le tableau 'qui a été généré' et celui en comparaison: ";
         echo "<span class='colorTextResult'>";
         echo var_dump($checkboxes1 <> $checkboxes2);
         echo "</span></li>";
 
-        echo "<li>" . "Test de comparaison (x !==y) avec le même tableau 'qui a été généré': ";
+        echo "<li>" . "est de comparaison (x !==y) avec le même tableau 'qui a été généré': ";
         echo "<span class='colorTextResult'>";
         echo var_dump($checkboxes1 !== $checkboxes1);
         echo "</span></li>";
 
-        echo "<li>" . "Test de comparaison (x !== y) avec le tableau 'qui a été généré' et celui en comparaison: ";
+        echo "<li>" . "est de comparaison (x !== y) avec le tableau 'qui a été généré' et celui en comparaison: ";
         echo "<span class='colorTextResult'>";
         echo var_dump($checkboxes1 !== $checkboxes2);
         echo "</span></li>";
@@ -297,23 +296,22 @@
         echo "<span class='colorTextResult'>";
         echo $result;
         echo "</span></li>";
+
         echo "<li>" . " Condition ternaire entre le tableau 'qui a été généré' et celui en comparaison: ";
         $checkboxes1 === $checkboxes2 ? $result = "les deux tableaux sont identique" : $result = "les deux tableaux ne sont identiques";
         echo "<span class='colorTextResult'>";
         echo $result;
         echo "</span></li>";
 
-        echo "<li>" . "Test si tableau généré exite et non null et si oui affiche ce tableau: ";
-        $resultTest = $checkboxes1 ?? $checkboxes2;
+        echo "<li>" . " Fusion nulle sur PHP7'qui a été généré' et celui en comparaison: ";
+        $toto = $checkboxes1 ?? $checkboxes2 ? $result = "les deux tableaux sont identique" : $result = "les deux tableaux ne sont identiques";
         echo "<span class='colorTextResult'>";
-        print_r($resultTest);
+        echo $toto;
         echo "</span></li>";
 
-        echo "<li>" . "Même test avec une variable null et si null, on affiche le tableau de comparaison: ";
-        $resultTest = $checkboxes3 ?? $checkboxes2;
-        echo "<span class='colorTextResult'>";
-        print_r($resultTest);
-        echo "</span></li>";
+
+
+
 
 
         echo "</div>";

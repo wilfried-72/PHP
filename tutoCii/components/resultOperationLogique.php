@@ -1,6 +1,6 @@
 <?php
 // appelle des fonctions
-require 'function.php';
+require '../utils/function.php';
 ?>
 
 <?php
@@ -58,5 +58,5 @@ $checkboxes = $_POST["checkboxes"];
 
 
 <div style="text-align:center">
-    <a href="phpTutorial.php">return </a>
+    <a href="../pages/phpTutorial.php">return </a>
 </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <!-- import css bootstrap  -->
-    <link href="css/index.css" rel="stylesheet">
+    <link href="../assets/css/index.css" rel="stylesheet">
 </head>
 
 <body>
@@ -12,9 +12,9 @@
     <!-- -------------------------------------------------------------------- -->
     <?php
     // apelle de la navBar
-    require 'nav.php';
+    require '../components/nav.php';
     // appelle des fonctions
-    require 'function.php';
+    require '../utils/function.php';
     ?>
 
     <h2 style="text-decoration:underline;text-align:center">Fonctions de Base</h2>
@@ -205,16 +205,16 @@
         <div>
             <!-- -------------------------------------------------------------------- -->
             <h4>Fonction avec operateur comparaison et incrémentation/décrémentation en utilisant un formulaire</h4>
-            <form action="resultOperation.php" method="post">
-                Nombre 1: <input required type="number" name="number1"><br>
-                Nombre 2: <input required type="number" name="number2"><br>
+            <form action="../components/resultOperation.php" method="post">
+                Nombre 1: <input type="number" name="number1"><br>
+                Nombre 2: <input type="number" name="number2"><br>
                 <input type="submit" value="Voir les différents calculs">
             </form>
         </div>
 
         <div>
             <h4>Fonction avec operateur logique en utilisant un formulaire</h4>
-            <form action="resultOperationLogique.php" method="post">
+            <form action="../components/resultOperationLogique.php" method="post">
                 <div class="box">
                     Checkbox1:<input id="checkbox1" type="checkbox" name="checkbox1"><br>
                     <input id="divCheckbox1" style="display:none;" type="text" name="checkbox1Text" value="la checkbox1 n'a pas été validée">
