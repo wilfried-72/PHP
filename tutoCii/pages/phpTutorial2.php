@@ -350,6 +350,8 @@
         <a href="phpTutorial2.php">Relancer le formulaire et effacer les données </a>
     </div>
 
+    <?php include '../components/footer.php'; ?>
+
 </body>
 
 </html>

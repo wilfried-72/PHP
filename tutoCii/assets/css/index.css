@@ -7,6 +7,16 @@ nav {
     margin-bottom: 5px;
 }
 
+footer {
+    display: flex;
+    flex-direction:row;
+    justify-content: end;
+    align-items: flex-end;
+    background-color: yellowgreen;
+    margin-top: 10px;
+    padding: 5px;
+}
+
 .colorTextResult {
     color: blue;
     font-weight: bold;
@@ -21,6 +31,11 @@ nav {
 h4 {
     margin-bottom: 0px;
     margin-top: 15px;
+}
+
+h2 {
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
 
 ul {
@@ -48,7 +63,7 @@ li {
     justify-content: space-around;
 }
 
-input  {
+input {
     margin: 5px;
 }
 
