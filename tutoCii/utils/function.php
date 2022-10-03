@@ -347,6 +347,32 @@
         $GLOBALS['z'] = $GLOBALS['x'] + $GLOBALS['y'];
     };
 
+    function countLetters($matches)
+    {
+        return $matches[0] . '(' . strlen($matches[0]) . ')';
+    };
+
+    function countLettersArray($matches)
+    {
+        return $matches[0] . '[' . strlen($matches[0]) . 'letter]';
+    };
+
+    function countDigits($matches)
+    {
+        return $matches[0] . '[' . strlen($matches[0]) . 'digit]';
+    };
+    function test_input($data)
+    {
+        // retourne la chaine en string
+        $data = trim($data);
+        // Supprime les antislashs d'une chaîne. 
+        $data = stripslashes($data);
+        // Convertit certains caractères prédéfinis en entités HTML.
+        $data = htmlspecialchars($data);
+        return $data;
+    };
+
+
     ?>
 
 

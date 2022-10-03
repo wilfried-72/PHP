@@ -1,5 +1,10 @@
-    <link href="../assets/css/index.css" rel="stylesheet">
+<!DOCTYPE html>
 
+<!-- import css bootstrap  -->
+<link href="../assets/css/index.css" rel="stylesheet">
+<html>
+
+<body>
     <!-- -------------------------------------------------------------------- -->
     <?php
     // apelle de la navBar
@@ -342,20 +347,24 @@
     </div>
 
     <div style="text-align:center;margin-top:30px">
-        <a href="phpTutorial2.php">Relancer le formulaire et affacer les données </a>
+        <a href="phpTutorial2.php">Relancer le formulaire et effacer les données </a>
     </div>
 
-    <script>
-        const message = document.getElementById("time")
-        inputFormTime = document.getElementById("inputFormTime");
+</body>
 
-        // inputTime.addEventListener('change', (event) => {
-        //     message.innerText = "";
+</html>
 
-        // });
+<script>
+    const message = document.getElementById("time")
+    inputFormTime = document.getElementById("inputFormTime");
 
-        inputFormTime.addEventListener('focusin', (event) => {
-            message.innerText = ""
+    // inputTime.addEventListener('change', (event) => {
+    //     message.innerText = "";
 
-        });
-    </script>
+    // });
+
+    inputFormTime.addEventListener('focusin', (event) => {
+        message.innerText = ""
+
+    });
+</script>

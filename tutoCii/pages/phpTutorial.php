@@ -1,13 +1,11 @@
 <!DOCTYPE html>
+
+<!-- import css bootstrap  -->
+<link href="../assets/css/index.css" rel="stylesheet">
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <!-- import css bootstrap  -->
-    <link href="../assets/css/index.css" rel="stylesheet">
-</head>
-
 <body>
+
 
     <!-- -------------------------------------------------------------------- -->
     <?php
@@ -233,6 +231,7 @@
             </form>
         </div>
     </div>
+
 </body>
 
 </html>

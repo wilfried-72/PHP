@@ -1,16 +1,18 @@
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apprendre PHP</title>
+    <!-- import css -->
     <link href="assets/css/index.css" rel="stylesheet">
 </head>
 
 <body>
 
-     <!-- -------------------------------------------------------------------- -->
-     <?php
+    <!-- -------------------------------------------------------------------- -->
+    <?php
     // apelle de la navBar
     require 'components/nav.php';
     ?>
