@@ -1,8 +1,3 @@
-<?php
-// Start the session
-session_start();
-?>
-
 <!DOCTYPE html>
 
 <!-- import css bootstrap  -->
@@ -190,7 +185,6 @@ session_start();
             echo "The file will be erased<br>";
             unlink($target_dir_name);
         }
-    
     }
 
     // Vérification de la taille du fichier en octet 
