@@ -28,11 +28,14 @@
     echo "This ", "string ", "was ", "made ", "with multiple parameters";
     ?>
 
+    <div style="text-align:center;margin:10px">
+        <a href="https://www.w3schools.com/php/php_ref_overview.asp" target="_blank">Retrouver toutes les references PHP en détail</a>
+    </div>
+
+
 
     <!-- lorsqu'un fichier est inclus dans l' include instruction et que PHP ne le trouve pas, le script continue à s'exécuter : -->
     <!-- À utiliser include lorsque le fichier n'est pas requis et que l'application doit continuer lorsque le fichier n'est pas trouvé. -->
-
-
     <?php
     echo " <br><br>----------------------- Test Include -------------------";
     include './components/footer.php';

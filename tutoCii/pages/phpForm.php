@@ -1,6 +1,16 @@
 <?php
+
+$cookie_name = "user";
+$cookie_value = "wil";
+$cookie_name2 = "admin";
+$cookie_value2 = "doe";
+// exprimer en seconde pour le temps des cookies
+// setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day donc 30 jours
+setcookie($cookie_name, $cookie_value, time() + 10, "/"); // cookie dure 1 min
+setcookie($cookie_name2, $cookie_value2, time() + 20, "/"); // cookie dure 1 min
+
 // Start the session
-session_start();
+// session_start();
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +119,6 @@ session_start();
                 <input type="submit" name="submit" value="Submit">
             </form>
         </div>
-
         <div>
             <?php
             // Donne les valeurs de tous les champs si il y aucune erreur de retournée
@@ -127,7 +136,7 @@ session_start();
                 echo $gender;
             }
             ?>
-            <div style="text-align:center;margin-top:50px">
+            <div style="text-align:center;padding:10px;margin-top:50px">
                 <a href="phpForm.php">Relancer le formulaire et effacer les données </a>
             </div>
 
@@ -135,37 +144,47 @@ session_start();
 
     </div>
 
-    <h2 style="text-decoration:underline;text-align:center">PHP Date and Time</h2>
-    <!-- -------------------------------------------------------------------- -->
+    <h2 style="text-decoration:underline;text-align:center">Gestion des cookies/session</h2>
 
-    <div class="box" style="border-style: solid; padding:5px;margin-bottom:10px;">
-        <div style="text-align:end;margin-top:0px">
-            <p>Syntax: date(format,timestamp)</p>
-
-            <?php
-            echo "Nous somme le: " . date("d/m/Y") . "<br>";
-            echo "Nous somme le: " . date("d.m.Y") . "<br>";
-            echo "Nous somme le: " . date("d-m-Y") . "<br>";
-            echo "Nous somme le: " . date("l") . " " . date("d-m-Y") . "<br>";
-            ?>
-
-
-
-
-
-
-
-
-
-
-        </div>
-    </div>
+    <form method="Get" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <input type="submit" name="submitCookie" value="Vérification des cookies">
+    </form>
 
     <?php
-    // Set session variables
-    $_SESSION["favcolor"] = "green";
-    $_SESSION["favanimal"] = "cat";
-    echo "Session variables are set.";
+    // // Set session variables
+    // $_SESSION["favcolor"] = "green";
+    // $_SESSION["favanimal"] = "cat";
+    // echo "Session variables are set.";
+
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (!isset($_COOKIE[$cookie_name])) {
+            echo "Cookie name '" . $cookie_name . "' is not set!<br>";
+        } else {
+            echo "Cookie '" . $cookie_name . "' is set!<br>";
+            echo "Value is: " . $_COOKIE[$cookie_name] . "<br>";
+        }
+
+        if (!isset($_COOKIE[$cookie_name2])) {
+            echo "Cookie name '" . $cookie_name2 . "' is not set!<br>";
+        } else {
+            echo "Cookie '" . $cookie_name2 . "' is set!<br>";
+            echo "Value is: " . $_COOKIE[$cookie_name2] . "<br>";
+        }
+
+        echo "Il reste " . (count($_COOKIE)) . " cookies de valide<br>";
+        // print_r($_COOKIE['user']);
+
+        // if (count($_COOKIE) > 0) {
+        //     echo "Cookies" . $_COOKIE['user'] . " are enabled.<br>";
+        // } else {
+        //     echo "Cookies" . $_COOKIE['user'] . "  are disabled.<br>";
+        // }
+        // if (count($_COOKIE) > 0) {
+        //     echo "Cookies" . $_COOKIE['admin'] . "  are enabled.<br>";
+        // } else {
+        //     echo "Cookies" . $_COOKIE['admin'] . " disabled.<br>";
+        // }
+    }
     ?>
 
     <?php include '../components/footer.php'; ?>

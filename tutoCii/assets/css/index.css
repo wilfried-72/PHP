@@ -57,6 +57,11 @@ li {
     margin-bottom: 5px;
 }
 
+.array li {
+    text-decoration: none;
+    list-style: none;
+}
+
 .box {
     display: flex;
     flex-direction: row;
