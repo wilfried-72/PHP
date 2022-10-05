@@ -218,17 +218,6 @@
             $text1 =  (float) $_GET["text1"];
             $gab1 =  (int) $_GET["gab1"];
 
-            function addNumbersFloat(float $a, int $b): float
-            {
-                return (float)($a += $b);
-            }
-
-            function addNumbers(float $a, int $b): int
-            {
-
-                return (int) ($a += $b);
-            }
-
             echo "Le resultat de l'opération est :" . addNumbersFloat($text1, $gab1) . "<br>";
             echo "Le resultat de l'opération sans la virgule est :" . addNumbers($text1, $gab1) . "<br>";
             ?>
@@ -347,7 +336,7 @@
     </div>
 
     <div style="text-align:center;margin-top:30px">
-        <a href="phpTutorial2.php">Relancer le formulaire et effacer les données </a>
+        <a href="<?php echo $_SERVER['PHP_SELF'] ?>">Relancer le formulaire et effacer les données </a>
     </div>
 
     <?php include '../components/footer.php'; ?>

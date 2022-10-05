@@ -130,7 +130,7 @@
     </div>
 
     <div style="text-align:center;margin-top:0px">
-        <a href="phpSuperGlobal.php">Relancer le formulaire et effacer les données </a>
+        <a href="<?php echo $_SERVER['PHP_SELF'] ?>">Relancer le formulaire et effacer les données </a>
     </div>
 
     <?php include '../components/footer.php'; ?>

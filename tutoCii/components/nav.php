@@ -6,5 +6,6 @@
       <a href="../pages/phpRegEx.php">Tutorial Regex</a>
       <a href="../pages/phpDate.php">Tutorial Date</a>
       <a href="../pages/phpFiles.php">Gestion file PHP</a>
-      <a href="../pages/phpForm.php">Php Form</a>
+      <a href="../pages/phpCEJ.php">Php Callback Exception et json</a>
+      <a href="../pages/phpForm.php">Php Form et cookie/session</a>
    </nav>

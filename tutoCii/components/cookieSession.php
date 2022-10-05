@@ -1,12 +1,13 @@
 <?php
-function eraseCookie($name,$value)
+// Fonction erase cookieTest
+function eraseCookie($name)
 {
-    echo "yoyo $name $value" ;
-    setcookie($name, $value, time() - 3600);
+    setcookie($name, "", time() - 3600, '/');
 }
-?>
 
-<!DOCTYPE html>
+//config session et demarrage session
+session_start();
+?>
 
 <!-- import css bootstrap  -->
 <link href="../assets/css/index.css" rel="stylesheet">
@@ -59,6 +60,13 @@ function eraseCookie($name,$value)
         echo "-----------------------------<br>";
         echo "Il reste " . (count($_COOKIE)) . " cookie(s) de valide<br>";
         echo "-----------------------------<br>";
+
+        // Verification des sessions
+        foreach ($_SESSION as $x => $val) {
+            echo "-----------------------------<br>";
+            echo "Parametre session <b>$x</b>  is <b>$val</b><br>";
+            echo "-----------------------------<br>";
+        }
     }
     ?>
 
@@ -66,8 +74,8 @@ function eraseCookie($name,$value)
         <a href="../pages/phpForm.php">Relancer les cookies qui se mettent sur la page PHP form </a>
     </div>
 
-    <form method="POST" action="../components/cookieSession.php">
-        <input type="submit" name="submitEraseCookie" value="Effacer cookieTest">
+    <form method="POST" action="">
+        <input type="submit" name="submitEraseCookie" value="Effacer cookieTest et session">
     </form>
 
     <?php
@@ -81,10 +89,12 @@ function eraseCookie($name,$value)
         if (!isset($_COOKIE["cookieTest"])) {
             echo "Cookie name 'cookieTest' is not set!<br>";
         } else {
-            eraseCookie('cookieTest',$_COOKIE["cookieTest"]);
+            // remove all session variables
+            session_unset();
+            // destroy the session
+            session_destroy();
+            eraseCookie('cookieTest');
         }
-
-        
     }
     ?>
 

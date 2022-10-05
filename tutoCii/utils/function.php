@@ -364,6 +364,40 @@
         return $data;
     };
 
+    function addNumbersFloat(float $a, int $b): float
+    {
+        return (float)($a += $b);
+    };
+
+    function addNumbers(float $a, int $b): int
+    {
+
+        return (int) ($a += $b);
+    };
+
+    function exclaim($str)
+    {
+        return $str . "! ";
+    };
+
+    function ask($str)
+    {
+        return $str . "? ";
+    };
+
+    function printFormatted($str, $format)
+    {
+        // Calling the $format callback function
+        echo $format($str);
+    };
+
+    function divide($dividend, $divisor)
+    {
+        if ($divisor == 0) {
+            throw new Exception("Division by zero", 1);
+        }
+        return $dividend / $divisor;
+    };
 
     ?>
 
