@@ -110,162 +110,68 @@
     </div>
 
     <h2 style="text-decoration:underline;text-align:center">Fonction sur les fichiers en format JSON</h2>
-    <div class="box" style="border-style: solid; padding:25px;margin-bottom:15px;text-align:center">
+    <div style="border-style: solid; padding:25px;margin-bottom:15px;text-align:center">
+
+        <!-- -------------------------------------------------------------------- -->
+        <h3>json_encode() </h3>
+        <p><b></p>Voici le tableau d'origine: </b></p>
+        <p>
+            "AJAX" => "Asynchronous JavaScript and XML", "CSS" => "Cascading Style Sheets", "HTML" => "Hyper Text Markup Language", "PHP" => "PHP Hypertext Preprocessor", "SQL" => "Structured Query Language", "SVG" => "Scalable Vector Graphics", "XML" => "EXtensible Markup Language"
+        </p>
+
+        <?php
+        $test = array("AJAX" => "Asynchronous JavaScript and XML", "CSS" => "Cascading Style Sheets", "HTML" => "Hyper Text Markup Language", "PHP" => "PHP Hypertext Preprocessor", "SQL" => "Structured Query Language", "SVG" => "Scalable Vector Graphics", "XML" => "EXtensible Markup Language");
+        echo "<p><b>Voici le json de généré: </b></p>";
+        echo json_encode($test);
+
+        $myfile = fopen(filePath . "TestEcritureJson.json", "w") or die("Unable to open file!");
+        $txt = json_encode($test);
+        fwrite($myfile, $txt);
+        fclose($myfile);
+
+        echo "<br><br>";
+        ?>
 
 
         <div>
             <!-- -------------------------------------------------------------------- -->
-            <h4>json_encode() </h4>
-
-
-            <?php
-
-
-            $file = file_get_contents(fileArray);
-            echo "file" . $file . "<br><br>";
-
-            // $file = rtrim($file, "\r\n");
-            // $file = str_replace("\r\n", "\n", $file);
-
-            $str2 = str_replace('\\' , "" , json_encode($file));
-
-            $age = array($str2);
-            // echo json_encode($age);
-            echo $str2;
-
-
-            ////////////////////////////////////////////////////////////Atttention, je garde ceci://////////////////////////////////////
-
-            // $myfile = fopen(filePath . "TestEcritureJson.json", "w") or die("Unable to open file!");
-            // $txt = json_encode($age);
-            // fwrite($myfile, $txt);
-            // fclose($myfile);
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-            // $a = [];
-            // $fileArray = fopen(fileArray, "r") or die("Unable to open file!");
-            // while (!feof($fileArray)) {
-            //     // array_push($a, fgets($fileArray));
-            //     echo fgets($fileArray) . "<br>";
-            //     // array_push($tab, fgets($fileArray));
-            // }
-            // fclose($fileArray);
-
-            // print_r($a);
-
-            // echo "json" . json_encode($test) . "<br>";
-
-            // echo "test: ". $test;
-            // $fileArray = fopen(fileArray, "r") or die("Unable to open file!");
-            // // echo fread($fileArray, filesize(fileArray));
-            // $toto = fread($fileArray, filesize(fileArray));
-            // fclose($fileArray);
-
-            // echo "test: " . $toto . "<br><br><br>";
-            // $age2 = array($toto);
-            // print_r($age2[0]);
-            // echo "<br>";
-
-            // $a = array();
-            // $test = array_push($a, $age2[0]);
-            // print_r($test);
-            // echo "<br>";
-
-            // foreach ($test as $x => $x_value) {
-            //     echo "Key=" . $x . ", Value=" . $x_value;
-            //     echo "<br>";
-            // }
-
-
-
-            // $bibi = array($age2[0]);
-
-            // $age = array("Peter" => "35", "Ben" => "37", "Joe" => "43");
-
-            // foreach ($age2 as $x => $x_value) {
-            //     echo "Key=" . $x . ", Value=" . $x_value;
-            //     echo "<br>";
-            // }
-
-            // echo "<br>";
-            // echo json_encode($age2[0]);
-
-
-            // $age = array(
-            //     "AJAX" => "Asynchronous JavaScript and XML",
-            //     "CSS" => "Cascading Style Sheets",
-            //     "HTML" => "Hyper Text Markup Language",
-            //     "PHP" => "PHP Hypertext Preprocessor",
-            //     "SQL" => "Structured Query Language",
-            //     "SVG" => "Scalable Vector Graphics",
-            //     "XML" => "EXtensible Markup Language"
-            // );
-            // print_r($age);
-            // echo json_encode($age);
-
-
-            // $toto = str_replace("\\", "", $toto);
-            // echo "new test toto: " . $toto . "<br>";
-            // $age = array($toto);
-            // print_r($age);
-            // echo "age: " . $age . "<br>";
-            // echo "json" . json_encode($age[0]) . "<br>";
-
-            // $toto = "";
-
-            // $myfile = fopen(fileArray, "r") or die("Unable to open file!");
-            // Output one line until end-of-file
-            // $tab = [];
-            // $fileArray = fopen(fileArray, "r") or die("Unable to open file!");
-            // while (!feof($fileArray)) {
-            //     // echo fgets($fileArray) . "<br>";
-            //     // array_push($tab, fgets($fileArray));
-            // }
-            // fclose($fileArray);
-
-            // $age = array($tab);
-            // print_r($age);
-            // echo "age: " . $age . "<br>";
-            // echo "json" . json_encode($age) . "<br>";
-
-            // echo "toto" . $toto;
-            // echo "json" . json_encode($tab2) . "<br>";
-
-            // print_r($tab);
-
-
-            // $fileArray = fopen(fileArray, "r") or die("Unable to open file!");
-            // echo fread($myfile, filesize(fileArray));
-            // fclose($myfile);
-            ?>
-
-
-        </div>
-
-        <div>
-            <!-- -------------------------------------------------------------------- -->
-            <h4>json_decode() </h4>
+            <h3>json_decode() à partir d'un fichier json enregistré dans architecture </h3>
 
             <?php
+            $json = file_get_contents(fileJson); //si je fait un echo là, pas de souci
+            $arr = json_decode($json, true);
+            echo "<br>--------------------<br>";
+            var_dump($arr);
+            echo "<br>--------------------<br><br>";
 
-            $json = file_get_contents(fileJson); //si je fait un echo là, pas de soucis
-            $obj = json_decode($json);
-            var_dump($obj);
+            echo "Name: " . $arr["members"][1]['name'] . "<br>";
+            echo "secretIdentity de " . $arr["members"][0]['name'] . " est " . $arr["members"][0]['secretIdentity']  . "<br>";
+            echo "<br>--------------------<br><br>";
+            
+            echo "<div class='box'>";
+            foreach ($arr["members"] as $key => $items) {
+                // echo  $key . " => " . $value . "<br>";
+                echo "<div>";
+                echo "********************************************<br>";
 
-            // $fileArray = fopen(fileJson, "r") or die("Unable to open file!");
-            // echo fread($fileArray, filesize(fileArray));
-            // $toto = fread($fileArray, filesize(fileArray));
-            // fclose($fileArray);
+                foreach ($items as $key => $item) {
+                    echo  $key . " : " . $item . "<br>";
+                    echo "---<br>";
 
-            // json_decode($toto);
+                    if ($key === "powers") {
+                        echo "**Powers**<br>";
+                        echo "_________________<br>";
+                        foreach ($item as $key => $value) {
+                            echo $value . "<br>";
+                        }
+                        echo "_________________<br>";
+                    }
+                }
+                echo "</div>";
+            }
+            echo "</div>";
             ?>
-
-
         </div>
-
-
     </div>
 
     <?php include '../components/footer.php'; ?>
