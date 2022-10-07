@@ -3,7 +3,7 @@
 -->
 <?php
 // import du fichier database.php
-require 'database.php';
+include '../../back/src/databases/database.php';
 
 // Si il y a une method post
 if (!empty($_POST)) {
@@ -66,8 +66,8 @@ if (!empty($_POST)) {
 
 <head>
     <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../assets/css/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -120,7 +120,7 @@ if (!empty($_POST)) {
                     <!-- Submit -->
                     <button type="submit" class="btn btn-success">Create</button>
                     <!-- redirect -->
-                    <a class="btn" href="index.php">Back</a>
+                    <a class="btn" href="../../index.php">Back</a>
                 </div>
             </form>
         </div>

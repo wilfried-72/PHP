@@ -2,6 +2,17 @@
   Script config connexion DB
 -->
 <?php
+
+require "DotEnv.php";
+// use DotEnv;
+
+(new DotEnv(__DIR__ . '/.env'))->load();
+
+// echo getenv('APP_ENV');
+// dev
+// echo "Je suis dans database.php";
+
+
 // On définit la class Database
 class Database
 {
@@ -33,7 +44,7 @@ class Database
       try {
         // On définit notre connexion qui est un nouvelle objet du constructeur PDO (notre connexion avec notre db)
         self::$cont =  new PDO("mysql:host=" . self::$dbHost . ";" . "dbname=" . self::$dbName, self::$dbUsername, self::$dbUserPassword);
-      // si j'arrive pas
+        // si j'arrive pas
       } catch (PDOException $e) {
         // je renvoie un message d'erreur
         die($e->getMessage());

@@ -7,9 +7,9 @@
 <head>
   <meta charset="utf-8">
   <!-- import css bootstrap -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="./front/assets/css/bootstrap.min.css" rel="stylesheet">
   <!-- import js bootstrap -->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="./front/assets/css/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     <div class="row">
       <p>
         <!-- Liens vers la page Create -->
-        <a href="create.php" class="btn btn-success">Create</a>
+        <a href="./front/pages/create.php" class="btn btn-success">Create</a>
       </p>
 
       <table class="table table-striped table-bordered">
@@ -38,7 +38,7 @@
           <!-- Script php : Boucle pour récupérer les customers dans la base de données -->
           <?php
           // import de la connexion Connexion à la DB
-          include 'database.php';
+          include './back/src/databases/database.php';
           // Appel de la class Database et de ça fontion connect()
           $pdo = Database::connect();
           // Script SQL : Selectionne moi tout dans customers trier par id dans l'ordre décroissant
