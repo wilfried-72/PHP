@@ -1,0 +1,12 @@
+Console mySql sur terminal: mysql -u root -p
+Version Ubuntu sur terminal: lsb_release -a
+Effacer istorique dans terminal: history -c
+
+Install DBeaver (idem que workbench) qui est utiliser par CII telecom 
+
+Problème connection PDO pour PHP mysql:
+sudo apt-get install php8.1-mysql       
+php -m | grep -i mysql
+
+Voir version apache:
+apache2 -

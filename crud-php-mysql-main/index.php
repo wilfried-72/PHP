@@ -24,7 +24,7 @@
       </p>
 
       <table class="table table-striped table-bordered">
-      <!-- Headers de notre tableau -->
+        <!-- Headers de notre tableau -->
         <thead>
           <tr>
             <th>Name</th>
