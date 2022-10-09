@@ -5,8 +5,8 @@ Effacer istorique dans terminal: history -c
 Install DBeaver (idem que workbench) qui est utiliser par CII telecom 
 
 Problème connection PDO pour PHP mysql:
+php --version
 sudo apt-get install php8.1-mysql       
-php -m | grep -i mysql
 
 Voir version apache:
-apache2 -
+apache2 -v

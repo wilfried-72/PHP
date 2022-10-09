@@ -1,1 +1,2 @@
 *.env
+crud-php-mysql-main/back/src/databases/.env
