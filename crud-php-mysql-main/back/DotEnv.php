@@ -1,5 +1,7 @@
 <?php
 
+$test = 'toto';
+
 class DotEnv
 {
     /**
@@ -56,3 +58,4 @@ class DotEnv
         }
     }
 }
+?>

@@ -4,10 +4,14 @@
 <?php
 
 // A enlever si on passe pas par le .env
-require "DotEnv.php";
+require_once "../../DotEnv.php";
+
+echo "sqsdqdqdqd".$test;
+
+
 
 // A enlever si on passe pas par le .env
-(new DotEnv(__DIR__ . '/.env'))->load();
+(new DotEnv('../../.env'))->load();
 
 // echo getenv('APP_ENV','DATABASE_NAME');
 // dev

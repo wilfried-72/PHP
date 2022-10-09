@@ -10,3 +10,6 @@ sudo apt-get install php8.1-mysql
 
 Voir version apache:
 apache2 -v
+
+
+https://github.com/ludoguenet/oop-php-framework/blob/master/composer.json
