@@ -1,5 +1,8 @@
 <?php
 
+// import de la connexion Connexion à la DB
+include './env.php';
+
 /**
  * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL !
  * 
@@ -13,7 +16,8 @@
  * - Le mode d'erreur : le mode exception permet à PDO de nous prévenir violament quand on fait une connerie ;-)
  * - Le mode d'exploitation : FETCH_ASSOC veut dire qu'on exploitera les données sous la forme de tableaux associatifs
  */
-$pdo = new PDO('mysql:host=localhost;dbname=blogpoo;charset=utf8', 'root', '', [
+
+$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'], $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ]);
@@ -31,7 +35,10 @@ $articles = $resultats->fetchAll();
  */
 $pageTitle = "Accueil";
 ob_start();
-require('templates/articles/index.html.php');
+require('./templates/articles/index.html.php');
 $pageContent = ob_get_clean();
+// $pageCss = "../front/assets/css/bootstrap.min.css";
 
-require('templates/layout.html.php');
+require('./templates/layout.html.php');
+?>
+
