@@ -17,7 +17,7 @@ include './env.php';
  * - Le mode d'exploitation : FETCH_ASSOC veut dire qu'on exploitera les données sous la forme de tableaux associatifs
  */
 
-$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'], $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
+$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ]);

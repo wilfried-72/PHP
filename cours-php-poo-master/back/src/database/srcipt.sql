@@ -1,10 +1,3 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
---
--- Database: `blogpoo`
 --
 CREATE DATABASE IF NOT EXISTS `crud_tutorial` CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE crud_tutorial;
@@ -23,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `content` text NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=142 DEFAULT CHARSET=latin1;
+) ENGINE = INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `articles`
@@ -66,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `article_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_ARTICLES` (`article_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=204 DEFAULT CHARSET=latin1;
+) ENGINE = INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `comments`
@@ -186,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE = INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
