@@ -2,36 +2,20 @@
   Script config connexion DB
 -->
 <?php
-
-// A enlever si on passe pas par le .env
-require_once "../../DotEnv.php";
-
-echo "sqsdqdqdqd".$test;
-
-
-
-// A enlever si on passe pas par le .env
-(new DotEnv('../../.env'))->load();
-
-// echo getenv('APP_ENV','DATABASE_NAME');
-// dev
-// echo "Je suis dans database.php";
-// echo $_ENV['DATABASE_NAME'];
-
 // On définit la class Database
 class Database
 {
   /* 
-   * On définit nos variables
+   * On définit nos variables de connexion mysql
    */
 
-  // connexion mysql
-  //Ancienne varaible sans passer par le .env
-  // private static $dbName = "crud_tutorial";
-  // private static $dbHost = "127.0.0.1";
-  // private static $dbUsername = "wil";
-  // private static $dbUserPassword = "Cii$22";
   private static $cont  = null;
+
+  //* Variable utilisée en private pour etre rappeler avec self:: */
+  // private static $dbName = "";
+  // private static $dbHost = "";
+  // private static $dbUsername = "";
+  // private static $dbUserPassword = "";
 
 
   // la connexion exporter
@@ -44,21 +28,28 @@ class Database
   // fonction de connexion
   public static function connect()
   {
-    $dbName = $_ENV['DATABASE_NAME'];
-    $dbHost = $_ENV['DATABASE_HOST'];
-    $dbUsername = $_ENV['DATABASE_USER'];
-    $dbUserPassword = $_ENV['DATABASE_PASSWORD'];
+
+    /* 
+   * On définit nos variables de connexion mysql
+   */
+
+    $appEnv = $GLOBALS['APP_ENV'];
+    $dbName = $GLOBALS['DATABASE_NAME'];
+    $dbHost = $GLOBALS['DATABASE_HOST'];
+    $dbUsername = $GLOBALS['DATABASE_USER'];
+    $dbUserPassword = $GLOBALS['DATABASE_PASSWORD'];
 
     // Une connexion à travers toute l'application
     if (null == self::$cont) {
       // j'essaie
       try {
-
-        // On définit notre connexion qui est un nouvelle objet du constructeur PDO (notre connexion avec notre db)
-        self::$cont =  new PDO("mysql:host=" . $dbHost . ";" . "dbname=" . $dbName, $dbUsername, $dbUserPassword);
-        // ancien code sans passer par le .env
+        // On définit notre connexion qui est un nouvelle objet du constructeur PDO (notre connexion avec notre db) avec les variables "private static".
         // self::$cont =  new PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName, self::$dbUsername, self::$dbUserPassword);
 
+        // On définit notre connexion qui est un nouvelle objet du constructeur PDO (notre connexion avec notre db) avec les variables "$global definit dans env.php.
+        self::$cont =  new PDO("mysql:host=" . $dbHost . ";" . "dbname=" . $dbName, $dbUsername, $dbUserPassword);
+
+        echo "Je suis en mode: " . strtoupper($appEnv) ."<br>";
         // echo "connection réussie";
 
         // si j'arrive pas

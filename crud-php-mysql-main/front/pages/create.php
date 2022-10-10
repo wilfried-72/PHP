@@ -2,8 +2,9 @@
     Page Create
 -->
 <?php
-// import du fichier database.php
+// import du fichier database.php et global variable env.php
 include '../../back/src/databases/database.php';
+include '../../env.php';
 
 // Si il y a une method post
 if (!empty($_POST)) {
@@ -53,7 +54,7 @@ if (!empty($_POST)) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "INSERT INTO customers (name,email,mobile) values(?, ?, ?)";
-        echo "sql requete". $sql;
+        // echo "sql requete". $sql;
         $q = $pdo->prepare($sql);
         $q->execute(array($name, $email, $mobile));
         Database::disconnect();

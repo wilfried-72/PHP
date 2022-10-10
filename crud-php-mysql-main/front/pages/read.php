@@ -2,8 +2,10 @@
     Page Get ID
 -->
 <?php
-// import du fichier database.php
-require 'database.php';
+// import du fichier database.php et global variable env.php
+include '../../back/src/databases/database.php';
+include '../../env.php';
+
 // on définit par default notre id en null
 $id = null;
 
@@ -16,7 +18,7 @@ if (!empty($_GET['id'])) {
 // si il n'y a pas d'id
 if (null == $id) {
     // on redirige sur la page index.php
-    header("Location: index.php");
+    header("Location: ../../index.php");
 } else {
     // on definit pdo pour la connexion
     $pdo = Database::connect();
@@ -30,6 +32,7 @@ if (null == $id) {
     $q->execute(array($id));
     // on définit le résultat de notre nouvelle recherche
     $data = $q->fetch(PDO::FETCH_ASSOC);
+    // print_r($data);
     // on se déconnect de notre db
     Database::disconnect();
 }
@@ -40,8 +43,8 @@ if (null == $id) {
 
 <head>
     <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../assets/css/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -82,7 +85,7 @@ if (null == $id) {
                 </div>
                 <div class="form-actions">
                     <!-- Boutton de retour à l'index.php -->
-                    <a class="btn" href="index.php">Back</a>
+                    <a class="btn" href="../../index.php">Back</a>
                 </div>
 
             </div>

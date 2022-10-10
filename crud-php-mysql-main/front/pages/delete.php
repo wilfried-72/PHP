@@ -2,8 +2,10 @@
     Page Delete ID
 -->
 <?php
-// import du fichier database.php
-require 'database.php';
+// import du fichier database.php et global variable env.php
+include '../../back/src/databases/database.php';
+include '../../env.php';
+
 // on définit par default notre id en 0
 $id = 0;
 
@@ -25,7 +27,7 @@ if (!empty($_POST)) {
     $q->execute(array($id));
     Database::disconnect();
     // et on redirige sur la page index
-    header("Location: index.php");
+    header("Location: ../../index.php");
 }
 ?>
 
@@ -34,8 +36,8 @@ if (!empty($_POST)) {
 
 <head>
     <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../assets/css/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -54,7 +56,7 @@ if (!empty($_POST)) {
                     <!-- Submit -->
                     <button type="submit" class="btn btn-danger">Yes</button>
                     <!-- Redirection page index -->
-                    <a class="btn" href="index.php">No</a>
+                    <a class="btn" href="../../index.php">No</a>
                 </div>
             </form>
         </div>

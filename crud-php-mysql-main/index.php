@@ -1,6 +1,8 @@
 <!-- 
     Page Get Index
 -->
+
+<!-- Code HTML -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,16 +35,19 @@
             <th>Action</th>
           </tr>
         </thead>
-        <!-- Corp de notre tableau -->
+        <!-- Corps de notre tableau -->
         <tbody>
           <!-- Script php : Boucle pour récupérer les customers dans la base de données -->
           <?php
           // import de la connexion Connexion à la DB
+          include './env.php';
           include './back/src/databases/database.php';
-          // Appel de la class Database et de ça fontion connect()
+          
+          // Appel de la class Database et de sa fontion connect()
           $pdo = Database::connect();
-          // Script SQL : Selectionne moi tout dans customers trier par id dans l'ordre décroissant
+          // Script SQL : Selectionner tous les data dans la table customers triées par id dans l'ordre décroissant
           $sql = 'SELECT * FROM customers ORDER BY id DESC';
+
           // Boucle php avec la construction html
           foreach ($pdo->query($sql) as $row) {
             echo '<tr>';
@@ -50,15 +55,15 @@
             echo '<td>' . $row['email'] . '</td>';
             echo '<td>' . $row['mobile'] . '</td>';
             echo '<td width=250>';
-            echo '<a class="btn" href="read.php?id=' . $row['id'] . '">Read</a>';
+            echo '<a class="btn" href="./front/pages/read.php?id=' . $row['id'] . '">Read</a>';
             echo ' ';
-            echo '<a class="btn btn-success" href="update.php?id=' . $row['id'] . '">Update</a>';
+            echo '<a class="btn btn-success" href="./front/pages/update.php?id=' . $row['id'] . '">Update</a>';
             echo ' ';
-            echo '<a class="btn btn-danger" href="delete.php?id=' . $row['id'] . '">Delete</a>';
+            echo '<a class="btn btn-danger" href="./front/pages/delete.php?id=' . $row['id'] . '">Delete</a>';
             echo '</td>';
             echo '</tr>';
           }
-          // Appel de la class Database et de ça fontion disconnect()
+          // Appel de la class Database et de sa fontion disconnect()
           Database::disconnect();
           ?>
         </tbody>

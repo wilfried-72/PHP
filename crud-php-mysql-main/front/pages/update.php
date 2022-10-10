@@ -2,8 +2,10 @@
     Page Update ID
 -->
 <?php
-// import du fichier database.php
-require 'database.php';
+// import du fichier database.php et global variable env.php
+include '../../back/src/databases/database.php';
+include '../../env.php';
+
 // on définit par default notre id en null
 $id = null;
 
@@ -15,64 +17,73 @@ if (!empty($_GET['id'])) {
 // si il n'y a pas d'id
 if (null == $id) {
     // on redirige sur la page index.php
-    header("Location: index.php");
-}
+    header("Location: ../../index.php");
+} else {
+    // Si il y a une method post
+    if (!empty($_POST)) {
+        // On définit nos variables à envoyer
+        $nameError = null;
+        $emailError = null;
+        $mobileError = null;
 
-// Si il y a une method post
-if (!empty($_POST)) {
-    // On définit nos variables à envoyer
-    $nameError = null;
-    $emailError = null;
-    $mobileError = null;
+        // On définit la valeur de nos variables au résultat de la method post
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $mobile = $_POST['mobile'];
 
-    // On définit la valeur de nos variable au résultat de la method post
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $mobile = $_POST['mobile'];
+        // On check nos variables input:
+        $valid = true;
+        if (empty($name)) {
+            $nameError = 'Please enter Name';
+            $valid = false;
+        }
 
-    // On check nos variable input:
-    $valid = true;
-    if (empty($name)) {
-        $nameError = 'Please enter Name';
-        $valid = false;
-    }
+        if (empty($email)) {
+            $emailError = 'Please enter Email Address';
+            $valid = false;
+        } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailError = 'Please enter a valid Email Address';
+            $valid = false;
+        }
 
-    if (empty($email)) {
-        $emailError = 'Please enter Email Address';
-        $valid = false;
-    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailError = 'Please enter a valid Email Address';
-        $valid = false;
-    }
+        if (empty($mobile)) {
+            $mobileError = 'Please enter Mobile Number';
+            $valid = false;
+        }
 
-    if (empty($mobile)) {
-        $mobileError = 'Please enter Mobile Number';
-        $valid = false;
-    }
-
-    // Si tout est valid alors
-    if ($valid) {
-        // update data
+        // Si tout est valid alors
+        if ($valid) {
+            // update data
+            $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "UPDATE customers  set name = ?, email = ?, mobile =? WHERE id = ?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($name, $email, $mobile, $id));
+            Database::disconnect();
+            header("Location: ../../index.php");
+        }
+        // Sinon on récupère les datas pour les afficher sur la page
+    } else {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE customers  set name = ?, email = ?, mobile =? WHERE id = ?";
+        $sql = "SELECT * FROM customers where id = ?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($name, $email, $mobile, $id));
+        $q->execute(array($id));
+        $data = $q->fetch(PDO::FETCH_ASSOC);
+        // echo 'data db dans page update<br>';
+        // print_r($data);
+
+
+        // echo "<br>" . strlen($data['name']);
+        // echo "<br> convert:  " . filter_var($data['name'], FILTER_SANITIZE_ADD_SLASHES);
+
+        // echo "<br>name: " . $data['name'] . "<br>";
+        // echo "verif si name n'est pas vide: " . !empty($name);
+        $name = $data['name'];
+        $email = $data['email'];
+        $mobile = $data['mobile'];
         Database::disconnect();
-        header("Location: index.php");
     }
-// Sinon on récupère les datas pour les afficher sur la page
-} else {
-    $pdo = Database::connect();
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "SELECT * FROM customers where id = ?";
-    $q = $pdo->prepare($sql);
-    $q->execute(array($id));
-    $data = $q->fetch(PDO::FETCH_ASSOC);
-    $name = $data['name'];
-    $email = $data['email'];
-    $mobile = $data['mobile'];
-    Database::disconnect();
 }
 ?>
 
@@ -81,8 +92,8 @@ if (!empty($_POST)) {
 
 <head>
     <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../assets/css/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -99,7 +110,7 @@ if (!empty($_POST)) {
                     <label class="control-label">Name</label>
                     <div class="controls">
                         <!-- Input pour l'envoi sur la méthod post -->
-                        <input name="name" type="text" placeholder="Name" value="<?php echo !empty($name) ? $name : ''; ?>">
+                        <input name="name" type="text" placeholder="Name" value="<?php echo !empty($name) ? htmlentities($name, ENT_QUOTES) : ''; ?>">
                         <!-- gestion de l'err no-data -->
                         <?php if (!empty($nameError)) : ?>
                             <span class="help-inline"><?php echo $nameError; ?></span>
@@ -132,7 +143,7 @@ if (!empty($_POST)) {
                     <!-- Submit -->
                     <button type="submit" class="btn btn-success">Update</button>
                     <!-- redirect -->
-                    <a class="btn" href="index.php">Back</a>
+                    <a class="btn" href="../../index.php">Back</a>
                 </div>
             </form>
         </div>
