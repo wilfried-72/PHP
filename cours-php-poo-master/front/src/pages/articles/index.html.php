@@ -13,7 +13,7 @@
                         <!-- voir l'article avec ces commentaires associées -->
                         <a href="../../../../front/src/partial/articles/article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary">Lire la suite</a>
                         <!-- supprimer l'article et les commentaires associées -->
-                        <a href="./front/src/partial/articles/delete-article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary" onclick="return window.confirm(`Êtes vous sur de vouloir supprimer cet article et les commentaires associés ?!`)">Supprimer</a>
+                        <a href="../../../../front/src/partial/articles/delete-article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary" onclick="return window.confirm(`Êtes vous sur de vouloir supprimer cet article et les commentaires associés ?!`)">Supprimer</a>
                     </div>
                 </div>
                 <div class="card-footer">

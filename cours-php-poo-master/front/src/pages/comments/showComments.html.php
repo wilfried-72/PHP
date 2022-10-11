@@ -15,7 +15,7 @@
     </div>
 
     <div class="d-flex justify-content-center my-3">
-        <a class="btn btn-sm btn-primary" href="../../../../index.php">Retour</a>
+    <a class="btn btn-primary" href="../../../../front/src/pages/articles/articles.php">Retour</a>
     </div>
 
     <?php if (count($commentaires) === 0) : ?>
@@ -79,7 +79,7 @@
             <div class="form-actions">
                 <!-- Submit -->
                 <button type="submit" class="btn btn-success">Commenter</button>
-                <a class="btn btn-primary" href="../../../../index.php">Retour</a>
+                <a class="btn btn-primary" href="../../../../front/src/pages/articles/articles.php">Retour</a>
             </div>
         </form>
     </div>

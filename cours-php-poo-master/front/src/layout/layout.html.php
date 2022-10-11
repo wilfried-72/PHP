@@ -12,7 +12,7 @@
 
 </head>
 
-<body class="bg-primary">
+<body class="bg-info">
     <?php include ('nav.php') ?>
     <?= $pageContent ?>
     <?php include ('footer.php') ?>
