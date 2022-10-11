@@ -1,7 +1,8 @@
 <?php
 
 // import de la connexion Connexion à la DB
-include './env.php';
+include '../../../../env.php';
+// echo "je suis dans la page articles.php";
 
 /**
  * CE FICHIER A POUR BUT D'AFFICHER LA PAGE D'ACCUEIL à travers le layout!
@@ -33,6 +34,7 @@ $pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GL
 $resultats = $pdo->query('SELECT * FROM articles ORDER BY created_at DESC');
 // On fouille le résultat pour en extraire les données réelles
 $articles = $resultats->fetchAll();
+// print_r($articles);
 
 /**
  * 3. Affichage
@@ -40,7 +42,8 @@ $articles = $resultats->fetchAll();
 $pageTitle = "Nos Articles";
 ob_start();
 //on utilise ce require pour afficher le Html
-require('./front/src/pages/home.html.php');
+// require('../article.php');
+require ('index.html.php');
 $pageContent = ob_get_clean();
 //on utilise ce require pour utiliser le bon layout
-require('./front/src/layout/layout.html.php');
+require('../../layout/layout.html.php');

@@ -1,4 +1,6 @@
 <?php
+// import de la connexion Connexion à la DB
+include '../../../../env.php';
 
 /**
  * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
@@ -35,29 +37,28 @@ if (!$article_id) {
  * 
  * PS : Vous remarquez que ce sont les mêmes lignes que pour l'index.php ?!
  */
-$pdo = new PDO('mysql:host=localhost;dbname=blogpoo;charset=utf8', 'root', '', [
+$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ]);
 
 /**
  * 3. Récupération de l'article en question
- * On va ici utiliser une requête préparée car elle inclue une variable qui provient de l'utilisateur : Ne faites
- * jamais confiance à ce connard d'utilisateur ! :D
+ * On va ici utiliser une requête préparée car elle inclue une variable qui provient de l'utilisateur 
  */
 $query = $pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
 
 // On exécute la requête en précisant le paramètre :article_id 
 $query->execute(['article_id' => $article_id]);
 
-// On fouille le résultat pour en extraire les données réelles de l'article
+// On obtient le résultat pour en extraire les données réelles de l'article
 $article = $query->fetch();
 
 /**
  * 4. Récupération des commentaires de l'article en question
- * Pareil, toujours une requête préparée pour sécuriser la donnée filée par l'utilisateur (cet enfoiré en puissance !)
+ * Pareil, toujours une requête préparée pour sécuriser la donnée filée par l'utilisateur
  */
-$query = $pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
+$query = $pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id ORDER BY created_at DESC ");
 $query->execute(['article_id' => $article_id]);
 $commentaires = $query->fetchAll();
 
@@ -66,7 +67,9 @@ $commentaires = $query->fetchAll();
  */
 $pageTitle = $article['title'];
 ob_start();
-require('templates/articles/show.html.php');
-$pageContent = ob_get_clean();
 
-require('templates/layout.html.php');
+//on utilise ce require pour afficher le Html
+require('../../pages/comments/showComments.html.php');
+$pageContent = ob_get_clean();
+//on utilise ce require pour utiliser le bon layout
+require('../../layout/layout.html.php');

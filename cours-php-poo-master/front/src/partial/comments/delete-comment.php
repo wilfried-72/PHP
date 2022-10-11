@@ -1,5 +1,6 @@
 <?php
-
+// import de la connexion Connexion à la DB
+include '../../../../env.php';
 /**
  * DANS CE FICHIER ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
  * 
@@ -25,7 +26,7 @@ $id = $_GET['id'];
  * 
  * PS : Vous remarquez que ce sont les mêmes lignes que pour l'index.php ?!
  */
-$pdo = new PDO('mysql:host=localhost;dbname=blogpoo;charset=utf8', 'root', '', [
+$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ]);
@@ -53,5 +54,5 @@ $query->execute(['id' => $id]);
 /**
  * 5. Redirection vers l'article en question
  */
-header("Location: article.php?id=" . $article_id);
+header('Location: ../articles/article.php?id=' . $article_id);
 exit();
