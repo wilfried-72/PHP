@@ -3,14 +3,19 @@
         <div class="col-md-6">
             <div class="login-card  text-center border border-dark"">
                 <h2 class=" text-center mb-4">Sign In</h2>
-                <form action="">
-                    <p>
-                        <label for="email">Email</label>
-                        <input type="text" class="form-input" name="email" placeholder="Enter your email address">
+                <form action="../../controllers/auth/auth.php" method="POST" <p>
+                    <label for="email">Email</label>
+                    <input required type="text" class="form-input" name="email" placeholder="Enter your email address">
                     </p>
                     <p>
                         <label for="password">Password</label>
-                        <input type="password" class="form-input" name="password" placeholder="Enter your password">
+                        <input id="lpassword-field" required type="password" class="form-input" name="lpassword" placeholder="Enter your password">
+                        <span><i toggle="#lpassword-field" class="fa fa-eye toggle-lpassword"></i></span>
+
+                        <!-- gestion de l'err no-data -->
+                        <?php if (!empty($authError)) : ?>
+                            <span class="help-inline text-danger bg-light"><?php echo $authError; ?></span>
+                        <?php endif; ?>
                     </p>
                     <input type="submit" class="btn btn-secondary my-2" value="Login">
                 </form>
@@ -50,52 +55,42 @@
                     <p>
                         <label for="password">Password</label>
                         <input id="password-field" type="password" class="form-input" name="password" placeholder="Enter your password" value="<?php echo $passwordView; ?>">
+                        <span><i toggle="#password-field" class="fa fa-eye toggle-password"></i></span>
                         <!-- gestion de l'err no-data -->
                         <?php if (!empty($passwordErr)) : ?>
                             <span class="help-inline text-danger bg-light"><?php echo $passwordErr; ?></span>
                         <?php endif; ?>
-                        <i toggle="#password-field" class="fa-solid fa-eye field-icon toggle-password""></i>
+
                     </p>
 
 
                     <p>
                         <label for=" password">Verif Password</label>
-                            <input id="cpassword-field" type="password" class="form-input" name="cpassword" placeholder="Enter yet your password">
-
-                            <!-- gestion de l'err no-data -->
-                            <?php if (!empty($cpasswordErr)) : ?>
-                                <span class="help-inline text-danger bg-light"><?php echo $cpasswordErr; ?></span>
-                            <?php endif; ?>
-                            <i toggle="#cpassword-field" class="fa-solid fa-eye field-icon toggle-cpassword""></i>
-
+                        <input id="cpassword-field" type="password" class="form-input" name="cpassword" placeholder="Enter yet your password">
+                        <span><i toggle="#cpassword-field" class="fa fa-eye toggle-cpassword"></i></span>
+                        <!-- gestion de l'err no-data -->
+                        <?php if (!empty($cpasswordErr)) : ?>
+                            <span class="help-inline text-danger bg-light"><?php echo $cpasswordErr; ?></span>
+                        <?php endif; ?>
                     </p>
 
                     <div class=" my-2">
-                                <input type="submit" class="btn btn-secondary" value="Register">
+                        <input type="submit" class="btn btn-secondary" value="Register">
+                    </div>
+                </form>
             </div>
-            </form>
-            <!-- gestion de l'err no-data -->
-            <?php
-            if ($valid) echo '<span class="help-inline text-success bg-light">' . $account . '</span>';
-            else echo '<span class="help-inline text-danger bg-light">' . $account . '</span>';
-            ?>
-
-
-
         </div>
-    </div>
 
-</div>
-<div class="d-flex justify-content-center mt-3">
-    <a class="btn btn-sm  btn-primary" href="../../../../front/src/controllers/auth/login.php">Effacer formulaire</a>
-</div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <a class="btn btn-sm  btn-primary" href="../../../../front/src/controllers/auth/login.php">Effacer formulaire</a>
+    </div>
 </div>
 
 
 <script>
     $(".toggle-password").click(function() {
-
-        $(this).toggleClass("fa-solid fa-eye-low-vision");
+        $(this).toggleClass("fa-eye fa-eye-slash");
         var input = $($(this).attr("toggle"));
         if (input.attr("type") == "password") {
             input.attr("type", "text");
@@ -105,8 +100,17 @@
     });
 
     $(".toggle-cpassword").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
 
-        $(this).toggleClass("fa-solid fa-eye-slash");
+    $(".toggle-lpassword").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
         var input = $($(this).attr("toggle"));
         if (input.attr("type") == "password") {
             input.attr("type", "text");

@@ -46,8 +46,12 @@ class Database
         // self::$cont =  new PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName, self::$dbUsername, self::$dbUserPassword);
 
         // On définit notre connexion qui est un nouvelle objet du constructeur PDO (notre connexion avec notre db) avec les variables "$global definit dans env.php.
-        self::$cont =  new PDO("mysql:host=" . $dbHost . ";" . "dbname=" . $dbName, $dbUsername, $dbUserPassword);
+        self::$cont =  new PDO("mysql:host=" . $dbHost . ";" . "dbname=" . $dbName .  ";" . "charset=utf8", $dbUsername, $dbUserPassword);
 
+      //   $pdo = new PDO('mysql:host=localhost;dbname=blogpoo;charset=utf8', 'root', '', [
+      //     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      //     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+      // ]);
         // echo "Je suis en mode: " . strtoupper($appEnv) ."<br>";
         // echo "connection réussie";
 

@@ -47,22 +47,27 @@ if (!empty($_POST)) {
         $emailError = 'Please enter a valid Email Address';
         // si il n'y a pas d'email alors
         $valid = false;
-    } else if (mb_strlen($_POST["password"]) <= 8) {
-        $passwordErr = "Your Password Must Contain At Least 8 Characters!";
+    } else if (empty($passwordView)) {
+        // variable de l'err
+        $passwordErr = 'Please enter a password with 8 character';
+        // si il n'y a pas d'email alors
         $valid = false;
-    } elseif (!preg_match("#[0-9]+#", $passwordView)) {
+    } else if (!preg_match("#[0-9]+#", $passwordView)) {
         $passwordErr = "Your Password Must Contain At Least 1 Number!";
         $valid = false;
-    } elseif (!preg_match("#[A-Z]+#", $passwordView)) {
+    } else if (!preg_match("#[A-Z]+#", $passwordView)) {
         $passwordErr = "Your Password Must Contain At Least 1 Capital Letter!";
         $valid = false;
-    } elseif (!preg_match("#[a-z]+#", $passwordView)) {
+    } else if (!preg_match("#[a-z]+#", $passwordView)) {
         $passwordErr = "Your Password Must Contain At Least 1 Lowercase Letter!";
         $valid = false;
-    } elseif (!preg_match("#[\W]+#", $passwordView)) {
+    } else if (!preg_match("#[\W]+#", $passwordView)) {
         $passwordErr = "Your Password Must Contain At Least 1 Special Character!";
         $valid = false;
-    } elseif (strcmp($passwordView, $cpassword) !== 0) {
+    } else if (strlen($passwordView) <= 8) {
+        $passwordErr = "Your Password Must Contain At Least 8 Characters!";
+        $valid = false;
+    } else if (strcmp($passwordView, $cpassword) !== 0) {
         $cpasswordErr = "Passwords must match!";
         $valid = false;
     }
@@ -76,16 +81,14 @@ if (!empty($_POST)) {
 
         $password = password_hash($passwordView, PASSWORD_DEFAULT);
 
+        $pdo = Database::connect();
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // $pdo = Database::connect();
-        // $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // $query = $pdo->prepare('INSERT INTO user SET author=:author, title = :title, introduction= :introduction, content = :content, created_at = NOW()');
-        // $query->execute(compact('author', 'title', 'introduction', 'content'));
-        // Database::disconnect();
+        $query = $pdo->prepare('INSERT INTO users SET first_name=:first_name, last_name =:last_name, email=:email, password=:password, created_at = NOW()');
+        $query->execute(compact('first_name', 'last_name', 'email', 'password'));
+        Database::disconnect();
 
         echo "<script> if (window.confirm(\"Votre compte a été crée\")) {location.href=\"../../../../front/src/controllers/auth/login.php\"}</script>";
-
     } else $account = "Votre compte n'est pas encore crée";
 }
 
