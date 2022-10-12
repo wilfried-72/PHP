@@ -5,7 +5,7 @@
     </div>
 
     <div class="d-flex justify-content-center mt-3 mb-3">
-        <form action="../../partial/comments/save-edit-comment.php" method="POST">
+        <form action="../../controllers/comments/save-edit-comment.php" method="POST">
 
             <div class="control-group">
                 <label class="control-label">Votre commentaire </label>
@@ -32,7 +32,7 @@
             <div class="form-actions">
                 <!-- Submit -->
                 <button type="submit" class="btn btn-success">Modifier</button>
-                <a class="btn btn-primary" href="<?php echo '../../partial/articles/article.php?id=' . $commentaires[0]['article_id'] ?>">Retour</a>
+                <a class="btn btn-primary" href="<?php echo '../../controllers/articles/article.php?id=' . $commentaires[0]['article_id'] ?>">Retour</a>
             </div>
         </form>
     </div>

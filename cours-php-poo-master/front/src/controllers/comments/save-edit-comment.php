@@ -1,6 +1,7 @@
 <?php
 // import de la connexion Connexion à la DB
 include '../../../../env.php';
+include '../../../../back/src/database/database.php';
 
 /**
  * CE FICHIER DOIT editer le commentaire selectionné
@@ -57,10 +58,8 @@ if (!$comment_id || !$content || !$article_id) {
      * 
      * PS : Ca fait pas genre 3 fois qu'on écrit ces lignes pour se connecter ?! 
      */
-    $pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
+    $pdo = Database::connect();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $query = $pdo->prepare('SELECT * FROM comments WHERE id = :comment_id');
     $query->execute(['comment_id' => $comment_id]);
@@ -77,7 +76,7 @@ if (!$comment_id || !$content || !$article_id) {
     // // 3. update du commentaire
     $query = $pdo->prepare('UPDATE comments SET content=:content, created_at = NOW() WHERE id = :comment_id');
     $query->execute(compact('content', 'comment_id'));
-
+    Database::disconnect();
     // // 4. Redirection vers l'commentaire en question :
     header('Location: ../articles/article.php?id=' . $article_id);
     exit();

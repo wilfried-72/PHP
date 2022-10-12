@@ -11,13 +11,16 @@
                 <div class="card-text mb-2">
                     <div class="d-flex justify-content-around">
                         <!-- voir l'article avec ces commentaires associées -->
-                        <a href="../../../../front/src/partial/articles/article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary">Lire la suite</a>
+                        <a href="../../../../front/src/controllers/articles/article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary">Lire la suite</a>
                         <!-- supprimer l'article et les commentaires associées -->
-                        <a href="../../../../front/src/partial/articles/delete-article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary" onclick="return window.confirm(`Êtes vous sur de vouloir supprimer cet article et les commentaires associés ?!`)">Supprimer</a>
+                        <a href="../../../../front/src/controllers/articles/delete-article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary" onclick="return window.confirm(`Êtes vous sur de vouloir supprimer cet article et les commentaires associés ?!`)">Supprimer</a>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Ecrit le <?= $article['created_at'] ?></small>
+                    <small class="text-muted">Ecrit le <?= $article['created_at'] ?>
+                        <?php if (!empty($article['author'])) : ?>
+                            <span class="help-inline"><?php echo " par " . $article['author']; ?></span>
+                        <?php endif; ?></small>
                 </div>
             </div>
         </div>

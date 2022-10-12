@@ -2,6 +2,7 @@
 
 // import de la connexion Connexion à la DB
 include '../../../../env.php';
+include '../../../../back/src/database/database.php';
 // echo "je suis dans la page articles.php";
 
 /**
@@ -21,11 +22,8 @@ include '../../../../env.php';
  * - Le mode d'erreur : le mode exception permet à PDO de nous prévenir violament quand on fait une connerie ;-)
  * - Le mode d'exploitation : FETCH_ASSOC veut dire qu'on exploitera les données sous la forme de tableaux associatifs
  */
-
-$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+$pdo = Database::connect();
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 /**
  * 2. Récupération des articles
@@ -34,6 +32,7 @@ $pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GL
 $resultats = $pdo->query('SELECT * FROM articles ORDER BY created_at DESC');
 // On fouille le résultat pour en extraire les données réelles
 $articles = $resultats->fetchAll();
+Database::disconnect();
 // print_r($articles);
 
 /**
@@ -43,7 +42,7 @@ $pageTitle = "Nos Articles";
 ob_start();
 //on utilise ce require pour afficher le Html
 // require('../article.php');
-require ('index.html.php');
+require ('../../pages/articles/listArticles.html.php');
 $pageContent = ob_get_clean();
 //on utilise ce require pour utiliser le bon layout
 require('../../layout/layout.html.php');

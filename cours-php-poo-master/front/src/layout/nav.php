@@ -2,8 +2,9 @@
    <nav>
       <div class="d-flex justify-content-around p-2 mb-5" style="background-color: aqua">
          <a href="../../../../index.php">home</a>
-         <a href="../../../../front/src/pages/articles/articles.php">Articles</a>
-         <a href="../../../../front/src/pages/login/login.php">Login</a>
+         <a href="../../../../front/src/controllers/articles/listArticles.php">Articles</a>
+         <a href="../../../../front/src/controllers/articles/create_article.php"> Créer un article</a>
+         <a href="../../../../front/src/controllers/auth/login.php">Login</a>
          <!-- <a href="../pages/phpTutorial.php">Tutorial php </a>
          <a href="../pages/phpTutorial2.php">Tutorial php suite</a>
          <a href="../pages/phpSuperGlobal.php">Tutorial variable Global</a>

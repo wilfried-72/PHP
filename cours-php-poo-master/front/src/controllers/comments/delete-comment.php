@@ -1,8 +1,9 @@
 <?php
 // import de la connexion Connexion à la DB
 include '../../../../env.php';
+include '../../../../back/src/database/database.php';
 /**
- * DANS CE FICHIER ON CHERCHE A éditer LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
+ * DANS CE FICHIER ON CHERCHE A SUPPRIMER LE COMMENTAIRE DONT L'ID EST PASSE EN PARAMETRE GET !
  * 
  * On va donc vérifier que le paramètre "id" est bien présent en GET, qu'il correspond bien à un commentaire existant
  * Puis on le supprimera !
@@ -17,17 +18,17 @@ if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
 
 $id = $_GET['id'];
 
+
 /**
  * 2. Connexion à la base de données avec PDO
  * Attention, on précise ici deux options :
  * - Le mode d'erreur : le mode exception permet à PDO de nous prévenir violament quand on fait une connerie ;-)
  * - Le mode d'exploitation : FETCH_ASSOC veut dire qu'on exploitera les données sous la forme de tableaux associatifs
  * 
+ * PS : Vous remarquez que ce sont les mêmes lignes que pour l'index.php ?!
  */
-$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+$pdo = Database::connect();
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 /**
  * 3. Vérification de l'existence du commentaire
@@ -38,23 +39,20 @@ if ($query->rowCount() === 0) {
     die("Aucun commentaire n'a l'identifiant $id !");
 }
 
-
 /**
- * 4. Récupération du commentaire
- * Pareil, toujours une requête préparée pour sécuriser la donnée filée par l'utilisateur
+ * 4. Suppression réelle du commentaire
+ * On récupère l'identifiant de l'article avant de supprimer le commentaire
  */
-$commentaires = $query->fetchAll();
 
-// print_r($commentaires); 
+$commentaire = $query->fetch();
+$article_id = $commentaire['article_id'];
 
+$query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
+$query->execute(['id' => $id]);
+
+Database::disconnect();
 /**
- * 5. On affiche 
+ * 5. Redirection vers l'article en question
  */
-$pageTitle = "Editer le commentaire";
-ob_start();
-
-//on utilise ce require pour afficher le Html
-require('../../pages/comments/editComments.html.php');
-$pageContent = ob_get_clean();
-//on utilise ce require pour utiliser le bon layout
-require('../../layout/layout.html.php');
+header('Location: ../articles/article.php?id=' . $article_id);
+exit();

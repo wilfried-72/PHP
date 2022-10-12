@@ -1,6 +1,7 @@
 <?php
 // import de la connexion Connexion à la DB
 include '../../../../env.php';
+include '../../../../back/src/database/database.php';
 
 /**
  * CE FICHIER DOIT ENREGISTRER UN NOUVEAU COMMENTAIRE EST REDIRIGER SUR L'ARTICLE en question!
@@ -57,10 +58,8 @@ if (!$author || !$article_id || !$content) {
      * 
      * PS : Ca fait pas genre 3 fois qu'on écrit ces lignes pour se connecter ?! 
      */
-    $pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-    ]);
+    $pdo = Database::connect();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $query = $pdo->prepare('SELECT * FROM articles WHERE id = :article_id');
     $query->execute(['article_id' => $article_id]);
@@ -73,6 +72,7 @@ if (!$author || !$article_id || !$content) {
     // 3. Insertion du commentaire
     $query = $pdo->prepare('INSERT INTO comments SET author = :author, content = :content, article_id = :article_id, created_at = NOW()');
     $query->execute(compact('author', 'content', 'article_id'));
+    Database::disconnect();
 
     // 4. Redirection vers l'article en question :
     header('Location: ../articles/article.php?id=' . $article_id);

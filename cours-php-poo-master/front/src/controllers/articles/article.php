@@ -1,6 +1,7 @@
 <?php
 // import de la connexion Connexion à la DB
 include '../../../../env.php';
+include '../../../../back/src/database/database.php';
 
 /**
  * CE FICHIER DOIT AFFICHER UN ARTICLE ET SES COMMENTAIRES !
@@ -37,10 +38,8 @@ if (!$article_id) {
  * 
  * PS : Vous remarquez que ce sont les mêmes lignes que pour l'index.php ?!
  */
-$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+$pdo = Database::connect();
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 /**
  * 3. Récupération de l'article en question
@@ -61,6 +60,8 @@ $article = $query->fetch();
 $query = $pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id ORDER BY created_at DESC ");
 $query->execute(['article_id' => $article_id]);
 $commentaires = $query->fetchAll();
+
+Database::disconnect();
 
 /**
  * 5. On affiche 

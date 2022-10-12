@@ -1,6 +1,7 @@
 <?php
 // import de la connexion Connexion à la DB
 include '../../../../env.php';
+include '../../../../back/src/database/database.php';
 
 /**
  * DANS CE FICHIER, ON CHERCHE A SUPPRIMER L'ARTICLE DONT L'ID EST PASSE EN GET et les commentaires associés
@@ -26,10 +27,9 @@ $id = $_GET['id'];
  * 
  * PS : Vous remarquez que ce sont les mêmes lignes que pour l'index.php ?!
  */
-$pdo = new PDO("mysql:host=" . $GLOBALS['DATABASE_HOST'] . ";" . "dbname=" . $GLOBALS['DATABASE_NAME'] . ';charset=utf8', $GLOBALS['DATABASE_USER'], $GLOBALS['DATABASE_PASSWORD'], [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-]);
+
+$pdo = Database::connect();
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 /**
  * 3. Vérification que l'article existe bel et bien
@@ -49,12 +49,13 @@ $query->execute(['id' => $id]);
 
 /**
  * 5. Vérification la présence de commentaire pour cet article
+ * Non utilisé
  */
-$query = $pdo->prepare('SELECT * FROM comments WHERE article_id= :id');
-$query->execute(['id' => $id]);
-if ($query->rowCount() === 0) {
-    die("Il n'y a pas de commentaire pour cet article, vous ne pouvez donc pas les supprimer !");
-}
+// $query = $pdo->prepare('SELECT * FROM comments WHERE article_id= :id');
+// $query->execute(['id' => $id]);
+// if ($query->rowCount() === 0) {
+//     die("Il n'y a pas de commentaire pour cet article, vous ne pouvez donc pas les supprimer !");
+// }
 
 /**
  * 4. Réelle suppression de tous les commentaire liés à cet article
@@ -62,8 +63,10 @@ if ($query->rowCount() === 0) {
 $query = $pdo->prepare('DELETE FROM comments WHERE article_id = :id');
 $query->execute(['id' => $id]);
 
+Database::disconnect();
+
 /**
  * 5. Redirection vers la page d'accueil
  */
-header("Location: ../../../../front/src/pages/articles/articles.php");
+header("Location: ../../../../front/src/controllers/articles/listArticles.php");
 exit();
