@@ -39,6 +39,7 @@ Database::disconnect();
  * 3. Affichage
  */
 $pageTitle = "Nos Articles";
+session_start();
 ob_start();
 //on utilise ce require pour afficher le Html
 // require('../article.php');

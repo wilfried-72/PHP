@@ -48,8 +48,10 @@
                         <div class="card-text mb-2">
 
                             <div class="d-flex justify-content-around">
-                                <a href="../../controllers/comments/edit-comment.php?id=<?= $commentaire['id'] ?>" class="btn btn-sm btn-primary">Editer</a>
-                                <a href="../../controllers/comments/delete-comment.php?id=<?= $commentaire['id'] ?>" class="btn btn-sm btn-primary" onclick="return(confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?`))">Supprimer</a>
+                                <?php if ($commentaire['author'] === $_SESSION["pseudo"]) : ?>
+                                    <a href="../../controllers/comments/edit-comment.php?id=<?= $commentaire['id'] ?>" class="btn btn-sm btn-primary">Editer</a>
+                                    <a href="../../controllers/comments/delete-comment.php?id=<?= $commentaire['id'] ?>" class="btn btn-sm btn-primary" onclick="return(confirm(`Êtes vous sûr de vouloir supprimer ce commentaire ?`))">Supprimer</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -59,37 +61,46 @@
                 </div>
             <?php endforeach ?>
         </div>
+
+
+        <div class="d-flex justify-content-center my-1">
+            <a class="btn btn-primary" href="../../../../front/src/controllers/articles/listArticles.php">Retour</a>
+        </div>
+
     <?php endif ?>
 
     <div class="d-flex justify-content-center mt-3 mb-3" id="formComment">
 
-        <form action="../../controllers/comments/save-comment.php" method="POST">
-            <h5>Vous voulez réagir ? N'hésitez pas!</h5>
-            <div class="control-group">
-                <label class="control-label">Votre pseudo</label>
-                <div class="controls">
-                    <input required ype="text" name="author" placeholder="Votre pseudo !">
-                </div>
-            </div>
+        <?php if (!empty($_SESSION["pseudo"])) : ?>
 
-            <div class="control-group">
-                <label class="control-label">Votre commentaire </label>
-                <div class="controls">
-                    <textarea required name="content" id="" cols="30" rows="10" placeholder="Votre commentaire ..."></textarea>
+            <form action="../../controllers/comments/save-comment.php" method="POST">
+                <h5>Vous voulez réagir ? N'hésitez pas!</h5>
+                <div class="control-group">
+                    <label class="control-label">Votre pseudo</label>
+                    <div class="controls">
+                        <input readonly type="text" name="author" placeholder="Votre pseudo !" value="<?php echo $_SESSION["pseudo"]; ?>">
+                    </div>
                 </div>
-            </div>
 
-            <div class="control-group">
-                <label class="control-label"></label>
-                <div class="controls">
-                    <input type="hidden" name="article_id" value="<?= $article_id ?>">
+                <div class="control-group">
+                    <label class="control-label">Votre commentaire </label>
+                    <div class="controls">
+                        <textarea required name="content" id="" cols="30" rows="10" placeholder="Votre commentaire ..."></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="form-actions">
-                <!-- Submit -->
-                <button type="submit" class="btn btn-success">Commenter</button>
-                <a class="btn btn-primary" href="../../../../front/src/controllers/articles/listArticles.php">Retour</a>
-            </div>
-        </form>
+
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <input type="hidden" name="article_id" value="<?= $article_id ?>">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-success">Commenter</button>
+                    <a class="btn btn-primary" href="../../../../front/src/controllers/articles/listArticles.php">Retour</a>
+                </div>
+            </form>
+        <?php endif; ?>
     </div>
 </div>

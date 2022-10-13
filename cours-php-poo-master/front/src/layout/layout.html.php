@@ -1,3 +1,14 @@
+<?php
+session_start();
+if ($setCookie) setcookie($cookie_name, $cookie_value, time() + 60, "/"); // cookie dure 1 min 
+if ($eraseCookie) setcookie($cookieErase_name, "", time() - 3600, '/');
+
+if ($session) {
+    $_SESSION['pseudo'] = ucfirst(substr($auth['first_name'], 0, 1)) . "." . ucfirst(substr($auth['last_name'], 0, 1));
+    $_SESSION['username'] = $auth['first_name'] . " " . $auth['last_name'];
+};
+?>
+
 <!-- Layout general -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,13 +22,27 @@
     <!-- CSS only -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
-
 </head>
 
-<body class="bg-info">
-    <?php include('nav.php') ?>
-    <?= $pageContent ?>
+<body <?php if (!empty($_SESSION["pseudo"])) {
+            echo 'class="bg-light"';
+        } else {
+            echo 'class="bg-info"';
+        } ?>>
+
+
+    <?php
+    if ($logout) {
+        session_unset();
+        session_destroy();
+    }
+
+    include('nav.php');
+    ?>
+
+    <?= $pageContent; ?>
+
+
     <?php include('footer.php') ?>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

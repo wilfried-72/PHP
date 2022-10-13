@@ -12,9 +12,12 @@
                     <div class="d-flex justify-content-around">
                         <!-- voir l'article avec ces commentaires associées -->
                         <a href="../../../../front/src/controllers/articles/article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary">Lire la suite</a>
-                        <!-- supprimer l'article et les commentaires associées -->
-                        <a href="../../../../front/src/controllers/articles/delete-article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary" onclick="return window.confirm(`Êtes vous sur de vouloir supprimer cet article et les commentaires associés ?!`)">Supprimer</a>
-                    </div>
+                        <!-- supprimer l'article et les commentaires associées que par l'auteur de cet article-->
+                        <?php if ($article['author'] === $_SESSION["pseudo"]) : ?>
+                            <a href="../../../../front/src/controllers/articles/delete-article.php?id=<?= $article['id'] ?>" class="btn btn-sm btn-primary" onclick="return window.confirm(`Êtes vous sur de vouloir supprimer cet article et les commentaires associés ?!`)">Supprimer</a>
+                        <?php endif; ?>
+
+                  </div>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Ecrit le <?= $article['created_at'] ?>

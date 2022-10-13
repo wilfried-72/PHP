@@ -22,17 +22,16 @@ if (!empty($_POST)) {
             $cookie_name = "CookieAuth";
             $cookie_value = true;
 
-
-
-
+            $GLOBALS['setCookie'] = true;
+            $GLOBALS['session'] = true;
 
             $pageTitle = "Auth";
             ob_start();
             //on utilise ce require pour afficher le Html
             require('../../pages/login/login.html.php');
-            $pageContent = ob_get_clean();
             //on utilise ce require pour utiliser le bon layout
-            require('../../layout/layout.htmlAdmin.php');
+            require('../../layout/layout.html.php');
+            header('Location: ../../../../index.php');
         } else {
             $authError = "Erreur de mail ou de mot de passe !";
             $pageTitle = "Auth";
@@ -53,4 +52,5 @@ if (!empty($_POST)) {
         //on utilise ce require pour utiliser le bon layout
         require('../../layout/layout.html.php');
     }
+    Database::disconnect();
 }

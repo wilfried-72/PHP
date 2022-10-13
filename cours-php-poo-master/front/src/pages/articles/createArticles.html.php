@@ -10,7 +10,7 @@
             <div class="control-group">
                 <label class="control-label">Votre pseudo</label>
                 <div class="controls">
-                    <input required ype="text" name="author" placeholder="Votre pseudo !">
+                    <input readonly  type="text" name="author" placeholder="Votre pseudo !" value="<?php echo $_SESSION["pseudo"];?>">
                 </div>
             </div>
             

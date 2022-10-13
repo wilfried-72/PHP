@@ -11,6 +11,7 @@ include '../../../../back/src/database/database.php';
  * 1. On vérifie que les données ont bien été envoyées en POST en double verification avec le required dans le formulaire html
  */
 
+
 $author = null;
 if (!empty($_POST['author'])) {
     $author = $_POST['author'];
@@ -33,7 +34,6 @@ if (!empty($_POST['introduction'])) {
     $introduction = htmlspecialchars($_POST['introduction']);
 }
 
-
 if ($author && $title && $content && $introduction) {
     $pdo = Database::connect();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -41,13 +41,13 @@ if ($author && $title && $content && $introduction) {
     $query = $pdo->prepare('INSERT INTO articles SET author=:author, title = :title, introduction= :introduction, content = :content, created_at = NOW()');
     $query->execute(compact('author', 'title', 'introduction', 'content'));
     Database::disconnect();
-
     header('Location: ../articles/listArticles.php');
 }
 
 /**
  * 5. On affiche 
  */
+session_start();
 $pageTitle = "créer un article";
 ob_start();
 
