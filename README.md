@@ -12,7 +12,3 @@ ou
 
 lancer index.php dans le terminal
 php index.php
-
-
-Mot de passe login temporaire:
-Az123456@

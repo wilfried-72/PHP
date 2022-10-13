@@ -1,2 +1,2 @@
-// lien du tuto
-https://www.youtube.com/watch?v=VSw1ximSue0
+Mot de passe login temporaire:
+Az123456@

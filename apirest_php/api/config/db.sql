@@ -1,6 +1,7 @@
-CREATE DATABASE IF NOT EXISTS `apirest_php` CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `crud_tutorial` CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-USE apirest_php;
+USE crud_tutorial;
+
 
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
