@@ -19,7 +19,8 @@ $product = new Product($db);
   
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
-  
+
+
 // make sure data is not empty
 if(
     !empty($data->name) &&
@@ -64,5 +65,6 @@ else{
   
     // tell the user
     echo json_encode(array("message" => "Unable to create product. Data is incomplete."));
+
 }
 ?>

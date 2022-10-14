@@ -18,6 +18,7 @@ $db = $database->getConnection();
 $product = new Product($db);
   
 // get product id
+// search in postman body file raw
 $data = json_decode(file_get_contents("php://input"));
   
 // set product id to be deleted
