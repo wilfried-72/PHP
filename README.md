@@ -1,5 +1,5 @@
-# CII
-Repo Formation CII telecom
+# PHP
+Repo Formation PHP
 
 j'utilise la doc https://www.w3schools.com/php pour ce tuto
 
