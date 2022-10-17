@@ -1,8 +1,6 @@
 Console mySql sur terminal: mysql -u root -p
-Version Ubuntu sur terminal: lsb_release -a
-Effacer istorique dans terminal: history -c
 
-Install DBeaver (idem que workbench) qui est utiliser par CII telecom 
+Install DBeaver (ou workbench)
 
 Problème connection PDO pour PHP mysql:
 php --version
@@ -10,6 +8,3 @@ sudo apt-get install php8.1-mysql
 
 Voir version apache:
 apache2 -v
-
-
-https://github.com/ludoguenet/oop-php-framework/blob/master/composer.json
